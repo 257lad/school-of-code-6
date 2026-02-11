@@ -1,116 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Frontend Engineering Academy Program</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:#0a0f1f;color:#e5e7eb;line-height:1.6}
-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);padding:100px 20px;text-align:center}
-header h1{font-size:42px;font-weight:800;margin-bottom:20px}
-header p{font-size:18px;opacity:.9}
-.container{max-width:1200px;margin:auto;padding:60px 20px}
-.phase{margin-bottom:80px}
-.phase-title{font-size:30px;font-weight:700;margin-bottom:30px;color:white;border-left:6px solid #3b82f6;padding-left:15px}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
-.card{background:#111827;border:1px solid #1f2937;border-radius:18px;padding:25px;transition:.3s}
-.card:hover{transform:translateY(-6px);border-color:#3b82f6}
-.card h3{color:#60a5fa;margin-bottom:15px;font-size:18px}
-ul{margin-left:18px}
-.badge{display:inline-block;background:#3b82f6;padding:6px 14px;border-radius:20px;font-size:12px;margin-bottom:15px;color:white}
-footer{text-align:center;padding:40px;background:#0f172a;border-top:1px solid #1f2937;color:#9ca3af}
-.highlight{color:#93c5fd;font-weight:600}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Engineering Academy Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0f1f;
+            color: #e5e7eb;
+            line-height: 1.6
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            padding: 100px 20px;
+            text-align: center
+        }
+
+        header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: .9
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px
+        }
+
+        .phase {
+            margin-bottom: 80px
+        }
+
+        .phase-title {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: white;
+            border-left: 6px solid #3b82f6;
+            padding-left: 15px
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 18px;
+            padding: 25px;
+            transition: .3s
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #3b82f6
+        }
+
+        .card h3 {
+            color: #60a5fa;
+            margin-bottom: 15px;
+            font-size: 18px
+        }
+
+        ul {
+            margin-left: 18px
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3b82f6;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            color: white
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #0f172a;
+            border-top: 1px solid #1f2937;
+            color: #9ca3af
+        }
+
+        .highlight {
+            color: #93c5fd;
+            font-weight: 600
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-<h1>School of code | HOGI Academy</h1>
-<p>4 Months • 2 Days Per Week • 32 Structured Sessions</p>
-<!-- <p><span class="highlight">Months 1–2:</span> Build Without AI • <span class="highlight">Months 3–4:</span> Build With AI & Real Projects</p> -->
-</header>
+    <header>
+        <h1>School of code | HOGI Academy</h1>
+        <p>4 Months • 2 Days Per Week • 32 Structured Sessions</p>
+        <!-- <p><span class="highlight">Months 1–2:</span> Build Without AI • <span class="highlight">Months 3–4:</span> Build With AI & Real Projects</p> -->
+    </header>
 
-<div class="container">
+    <div class="container">
 
-<!-- HTML PHASE -->
-<section class="phase">
-<div class="badge">PHASE 1 — HTML (Sessions 1–4)</div>
-<h2 class="phase-title">Web Foundations & Structure</h2>
-<div class="card-grid">
-<div class="card"><h3>Session 1</h3><ul><li>How the Web Works</li><li>HTML Document Structure</li><li>Headings & Paragraphs</li></ul></div>
-<div class="card"><h3>Session 2</h3><ul><li>Links & Images</li><li>Lists</li><li>Mini Practice Page</li></ul></div>
-<div class="card"><h3>Session 3</h3><ul><li>Semantic HTML</li><li>Forms & Inputs</li><li>Accessibility Basics</li></ul></div>
-<div class="card"><h3>Session 4</h3><ul><li>Tables & Media</li><li>Mini Project: CV Website</li></ul></div>
-</div>
-</section>
+        <!-- HTML PHASE -->
+        <section class="phase">
+            <div class="badge">PHASE 1 — HTML (Sessions 1–4)</div>
+            <h2 class="phase-title">Web Foundations & Structure</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Session 1</h3>
+                    <ul>
+                        <li>How the Web Works</li>
+                        <li>HTML Document Structure</li>
+                        <li>Headings & Paragraphs</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 2</h3>
+                    <ul>
+                        <li>Links & Images</li>
+                        <li>Lists</li>
+                        <li>Mini Practice Page</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 3</h3>
+                    <ul>
+                        <li>Semantic HTML</li>
+                        <li>Forms & Inputs</li>
+                        <li>Accessibility Basics</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 4</h3>
+                    <ul>
+                        <li>Tables & Media</li>
+                        <li>Mini Project: CV Website</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- CSS PHASE -->
-<section class="phase">
-<div class="badge">PHASE 2 — CSS (Sessions 5–8)</div>
-<h2 class="phase-title">Design & Responsive Layout</h2>
-<div class="card-grid">
-<div class="card"><h3>Session 5</h3><ul><li>CSS Syntax & Selectors</li><li>Colors & Typography</li></ul></div>
-<div class="card"><h3>Session 6</h3><ul><li>Box Model</li><li>Spacing & Positioning</li></ul></div>
-<div class="card"><h3>Session 7</h3><ul><li>Flexbox Deep Dive</li><li>Responsive Navbar</li></ul></div>
-<div class="card"><h3>Session 8</h3><ul><li>CSS Grid</li><li>Landing Page Project</li></ul></div>
-</div>
-</section>
+        <!-- CSS PHASE -->
+        <section class="phase">
+            <div class="badge">PHASE 2 — CSS (Sessions 5–8)</div>
+            <h2 class="phase-title">Design & Responsive Layout</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Session 5</h3>
+                    <ul>
+                        <li>CSS Syntax & Selectors</li>
+                        <li>Colors & Typography</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 6</h3>
+                    <ul>
+                        <li>Box Model</li>
+                        <li>Spacing & Positioning</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 7</h3>
+                    <ul>
+                        <li>Flexbox Deep Dive</li>
+                        <li>Responsive Navbar</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 8</h3>
+                    <ul>
+                        <li>CSS Grid</li>
+                        <li>Landing Page Project</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- JAVASCRIPT PHASE -->
-<section class="phase">
-<div class="badge">PHASE 3 — JAVASCRIPT (Sessions 9–14)</div>
-<h2 class="phase-title">Programming Logic & Interactivity</h2>
-<div class="card-grid">
-<div class="card"><h3>Session 9</h3><ul><li>Variables & Data Types</li><li>Operators</li></ul></div>
-<div class="card"><h3>Session 10</h3><ul><li>Conditionals</li><li>Loops</li></ul></div>
-<div class="card"><h3>Session 11</h3><ul><li>Functions</li><li>Arrays & Objects</li></ul></div>
-<div class="card"><h3>Session 12</h3><ul><li>DOM Manipulation</li><li>Events</li></ul></div>
-<div class="card"><h3>Session 13</h3><ul><li>LocalStorage</li><li>Mini Project: To-Do App</li></ul></div>
-<div class="card"><h3>Session 14</h3><ul><li>Fetch API</li><li>Weather App</li></ul></div>
-</div>
-</section>
+        <!-- JAVASCRIPT PHASE -->
+        <section class="phase">
+            <div class="badge">PHASE 3 — JAVASCRIPT (Sessions 9–14)</div>
+            <h2 class="phase-title">Programming Logic & Interactivity</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Session 9</h3>
+                    <ul>
+                        <li>Variables & Data Types</li>
+                        <li>Operators</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 10</h3>
+                    <ul>
+                        <li>Conditionals</li>
+                        <li>Loops</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 11</h3>
+                    <ul>
+                        <li>Functions</li>
+                        <li>Arrays & Objects</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 12</h3>
+                    <ul>
+                        <li>DOM Manipulation</li>
+                        <li>Events</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 13</h3>
+                    <ul>
+                        <li>LocalStorage</li>
+                        <li>Mini Project: To-Do App</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 14</h3>
+                    <ul>
+                        <li>Fetch API</li>
+                        <li>Weather App</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- VUE PHASE -->
-<section class="phase">
-<div class="badge">PHASE 4 — VUE.JS (Sessions 15–22)</div>
-<h2 class="phase-title">Modern Frontend Development</h2>
-<div class="card-grid">
-<div class="card"><h3>Session 15</h3><ul><li>Vue Introduction</li><li>Reactivity & Directives</li></ul></div>
-<div class="card"><h3>Session 16</h3><ul><li>Components</li><li>Routing</li></ul></div>
-<div class="card"><h3>Session 17</h3><ul><li>Movie App Project</li></ul></div>
-<div class="card"><h3>Session 18</h3><ul><li>Form Validation</li></ul></div>
-<div class="card"><h3>Session 19</h3><ul><li>Dashboard UI</li></ul></div>
-<div class="card"><h3>Session 20</h3><ul><li>API Integration</li></ul></div>
-<div class="card"><h3>Session 21</h3><ul><li>Vue Blog Platform</li></ul></div>
-<div class="card"><h3>Session 22</h3><ul><li>E‑Commerce Frontend</li></ul></div>
-</div>
-</section>
+        <!-- VUE PHASE -->
+        <section class="phase">
+            <div class="badge">PHASE 4 — VUE.JS (Sessions 15–22)</div>
+            <h2 class="phase-title">Modern Frontend Development</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Session 15</h3>
+                    <ul>
+                        <li>Vue Introduction</li>
+                        <li>Reactivity & Directives</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 16</h3>
+                    <ul>
+                        <li>Components</li>
+                        <li>Routing</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 17</h3>
+                    <ul>
+                        <li>Movie App Project</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 18</h3>
+                    <ul>
+                        <li>Form Validation</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 19</h3>
+                    <ul>
+                        <li>Dashboard UI</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 20</h3>
+                    <ul>
+                        <li>API Integration</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 21</h3>
+                    <ul>
+                        <li>Vue Blog Platform</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 22</h3>
+                    <ul>
+                        <li>E‑Commerce Frontend</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- IONIC + AI + PORTFOLIO -->
-<section class="phase">
-<div class="badge">PHASE 5 — IONIC + AI PROJECTS (Sessions 23–32)</div>
-<h2 class="phase-title">Mobile Development & Professional Portfolio</h2>
-<div class="card-grid">
-<div class="card"><h3>Session 23</h3><ul><li>Ionic Setup</li><li>Mobile UI Components</li></ul></div>
-<div class="card"><h3>Session 24</h3><ul><li>Mobile Notes App</li></ul></div>
-<div class="card"><h3>Session 25</h3><ul><li>Mobile Shop App</li></ul></div>
-<div class="card"><h3>Session 26</h3><ul><li>Chat UI</li></ul></div>
-<div class="card"><h3>Session 27</h3><ul><li>Using AI for Refactoring</li><li>Prompt Engineering Basics</li></ul></div>
-<div class="card"><h3>Session 28</h3><ul><li>AI‑Assisted Feature Building</li></ul></div>
-<div class="card"><h3>Session 29</h3><ul><li>Start Final Portfolio Project</li><li>Architecture Planning</li></ul></div>
-<div class="card"><h3>Session 30</h3><ul><li>Portfolio Development</li></ul></div>
-<div class="card"><h3>Session 31</h3><ul><li>Mobile Optimization</li><li>Deployment</li></ul></div>
-<div class="card"><h3>Session 32</h3><ul><li>Demo Day</li><li>Presentation & Graduation</li></ul></div>
-</div>
-</section>
+        <!-- IONIC + AI + PORTFOLIO -->
+        <section class="phase">
+            <div class="badge">PHASE 5 — IONIC + AI PROJECTS (Sessions 23–32)</div>
+            <h2 class="phase-title">Mobile Development & Professional Portfolio</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Session 23</h3>
+                    <ul>
+                        <li>Ionic Setup</li>
+                        <li>Mobile UI Components</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 24</h3>
+                    <ul>
+                        <li>Mobile Notes App</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 25</h3>
+                    <ul>
+                        <li>Mobile Shop App</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 26</h3>
+                    <ul>
+                        <li>Chat UI</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 27</h3>
+                    <ul>
+                        <li>Using AI for Refactoring</li>
+                        <li>Prompt Engineering Basics</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 28</h3>
+                    <ul>
+                        <li>AI‑Assisted Feature Building</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 29</h3>
+                    <ul>
+                        <li>Start Final Portfolio Project</li>
+                        <li>Architecture Planning</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 30</h3>
+                    <ul>
+                        <li>Portfolio Development</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 31</h3>
+                    <ul>
+                        <li>Mobile Optimization</li>
+                        <li>Deployment</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Session 32</h3>
+                    <ul>
+                        <li>Demo Day</li>
+                        <li>Presentation & Graduation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-</div>
+    </div>
 
-<footer>
-<p>© 2026 Frontend Engineering Academy • Premium Professional Program</p>
-</footer>
+    <footer>
+        <p>© 2026 Frontend Engineering Academy • Premium Professional Program</p>
+    </footer>
 
 </body>
+
 </html>
