@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOGI Academy | Guide JavaScript Complet</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+    :root {
+      --bg: #0f1623;
+      --card: #1a2235;
+      --alt: #1e2840;
+      --code: #111927;
+      --bdr: #2a3a5c;
+      --blue: #4d8ef0;
+      --bdim: #4d8ef018;
+      --bbdr: #4d8ef040;
+      --t1: #ffffff;
+      --t2: #a8b8d8;
+      --t3: #5a6e8c;
+      --kw: #ff7b72;
+      --str: #a5d6ff;
+      --num: #79c0ff;
+      --cmt: #4a607a;
+      --fn: #d2a8ff;
+      --var: #ffa657;
+      --prop: #56d4dd;
+      --green: #3fb950;
+      --orange: #d29922;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--t1);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7
+    }
+
+    /* HEADER */
+    .hdr {
+      background: linear-gradient(160deg, #0d1b3e 0%, #1a3a7c 50%, #1e2d6b 100%);
+      padding: 56px 24px 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--bbdr)
+    }
+
+    .hdr h1 {
+      font-size: clamp(22px, 4vw, 40px);
+      font-weight: 800
+    }
+
+    .hdr p {
+      color: var(--t2);
+      margin-top: 8px;
+      font-size: 14px
+    }
+
+    .pills {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px
+    }
+
+    .pill {
+      background: var(--bdim);
+      border: 1px solid var(--bbdr);
+      color: var(--blue);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600
+    }
+
+    /* TOC */
+    .toc {
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin: 40px 0 48px
+    }
+
+    .toc-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--t3);
+      margin-bottom: 14px
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 6px
+    }
+
+    .toc-item {
+      color: var(--blue);
+      font-size: 13.5px;
+      text-decoration: none;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .toc-item::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0
+    }
+
+    .toc-item:hover {
+      color: #fff
+    }
+
+    /* LAYOUT */
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 52px 24px 80px
+    }
+
+    .phase-tag {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px
+    }
+
+    .phase-h {
+      font-size: 26px;
+      font-weight: 800;
+      border-left: 4px solid var(--blue);
+      padding-left: 14px;
+      margin-bottom: 28px
+    }
+
+    .sec-h {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 36px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .sec-h::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: var(--blue);
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    p {
+      color: var(--t2);
+      margin-bottom: 10px
+    }
+
+    strong {
+      color: #fff
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 12.5px;
+      background: var(--alt);
+      color: var(--prop);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--bdr)
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 14px
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    /* VAR VISUAL */
+    .var-visual {
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin: 16px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px
+    }
+
+    @media(max-width:580px) {
+      .var-visual {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .box-demo {
+      text-align: center
+    }
+
+    .box-shelf {
+      display: inline-block;
+      border: 2px solid var(--bdr);
+      border-radius: 10px;
+      padding: 16px 28px;
+      min-width: 160px;
+      position: relative;
+      margin-top: 10px
+    }
+
+    .box-label {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card);
+      padding: 0 8px;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--blue)
+    }
+
+    .box-val {
+      font-family: 'Fira Code', monospace;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--var)
+    }
+
+    .box-type {
+      font-size: 12px;
+      color: var(--t3);
+      margin-top: 4px
+    }
+
+    .box-lock {
+      font-size: 11px;
+      margin-top: 6px;
+      color: var(--t3)
+    }
+
+    /* TABLES */
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 13.5px;
+      margin: 14px 0
+    }
+
+    .tbl thead tr {
+      background: var(--alt)
+    }
+
+    .tbl th {
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--t3);
+      border-bottom: 1px solid var(--bdr)
+    }
+
+    .tbl td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--bdr);
+      color: var(--t2);
+      vertical-align: top
+    }
+
+    .tbl tr:last-child td {
+      border-bottom: none
+    }
+
+    .tbl td:first-child {
+      color: #fff;
+      font-weight: 600
+    }
+
+    /* CODE BLOCK */
+    .cb {
+      background: var(--code);
+      border: 1px solid var(--bdr);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .cb-h {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      background: var(--card);
+      border-bottom: 1px solid var(--bdr)
+    }
+
+    .cb-lang {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .6px
+    }
+
+    .dots {
+      display: flex;
+      gap: 5px
+    }
+
+    .d {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%
+    }
+
+    pre {
+      padding: 18px 20px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13.5px;
+      line-height: 1.85;
+      overflow-x: auto
+    }
+
+    .kw {
+      color: var(--kw)
+    }
+
+    .str {
+      color: var(--str)
+    }
+
+    .nm {
+      color: var(--num)
+    }
+
+    .cm {
+      color: var(--cmt)
+    }
+
+    .fn {
+      color: var(--fn)
+    }
+
+    .vr {
+      color: var(--var)
+    }
+
+    .op {
+      color: #c9d1d9
+    }
+
+    .pr {
+      color: var(--prop)
+    }
+
+    .gr {
+      color: var(--green)
+    }
+
+    /* LOOP ANATOMY */
+    .loop-box {
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 14px 0
+    }
+
+    .loop-line {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      background: var(--code);
+      border: 1px solid var(--bdr);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center
+    }
+
+    .lp {
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-weight: 500
+    }
+
+    .lp-kw {
+      color: var(--kw)
+    }
+
+    .lp-pl {
+      color: #c9d1d9
+    }
+
+    .lp-i {
+      background: #ffa65718;
+      color: var(--var);
+      border: 1px solid #ffa65735
+    }
+
+    .lp-c {
+      background: #a5d6ff18;
+      color: var(--str);
+      border: 1px solid #a5d6ff35
+    }
+
+    .lp-inc {
+      background: #3fb95018;
+      color: var(--green);
+      border: 1px solid #3fb95035
+    }
+
+    .parts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px
+    }
+
+    .part {
+      display: flex;
+      gap: 10px
+    }
+
+    .part-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 5px
+    }
+
+    .part-body .pt {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px
+    }
+
+    .part-body .pd {
+      font-size: 12.5px;
+      color: var(--t2);
+      line-height: 1.55
+    }
+
+    /* OPERATOR ROWS */
+    .op-row {
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px
+    }
+
+    .op-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      background: var(--alt);
+      border-bottom: 1px solid var(--bdr)
+    }
+
+    .op-sym {
+      font-family: 'Fira Code', monospace;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--kw);
+      background: var(--code);
+      border: 1px solid var(--bdr);
+      padding: 3px 10px;
+      border-radius: 6px;
+      min-width: 54px;
+      text-align: center
+    }
+
+    .op-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff
+    }
+
+    .op-desc {
+      font-size: 13px;
+      color: var(--t2);
+      margin-top: 2px
+    }
+
+    .op-body {
+      padding: 14px 16px
+    }
+
+    .op-ex {
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.95;
+      color: var(--t2)
+    }
+
+    .op-ex .res {
+      color: var(--green)
+    }
+
+    /* METHOD CARDS */
+    .mth-card {
+      background: var(--card);
+      border: 1px solid var(--bdr);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px
+    }
+
+    .mth-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--alt);
+      border-bottom: 1px solid var(--bdr)
+    }
+
+    .mth-name {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--prop)
+    }
+
+    .mth-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: .4px
+    }
+
+    .b-arr {
+      background: #56d4dd15;
+      color: var(--prop);
+      border: 1px solid #56d4dd30
+    }
+
+    .b-obj {
+      background: #d2a8ff15;
+      color: var(--fn);
+      border: 1px solid #d2a8ff30
+    }
+
+    .mth-desc {
+      font-size: 13px;
+      color: var(--t2);
+      margin-left: auto
+    }
+
+    .mth-body {
+      padding: 14px 16px
+    }
+
+    /* INFO / WARN */
+    .info {
+      display: flex;
+      gap: 12px;
+      padding: 13px 16px;
+      background: #4d8ef010;
+      border: 1px solid #4d8ef030;
+      border-radius: 8px;
+      margin: 14px 0
+    }
+
+    .warn {
+      display: flex;
+      gap: 12px;
+      padding: 13px 16px;
+      background: #d2992210;
+      border: 1px solid #d2992230;
+      border-radius: 8px;
+      margin: 14px 0
+    }
+
+    .info p,
+    .warn p {
+      font-size: 13.5px;
+      margin: 0;
+      color: var(--t2)
+    }
+
+    .ico {
+      font-size: 16px;
+      flex-shrink: 0
+    }
+
+    /* COMPARE */
+    .cmp {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    @media(max-width:580px) {
+      .cmp {
+        grid-template-columns: 1fr
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--bdr);
+      margin: 52px 0
+    }
+
+    footer {
+      border-top: 1px solid var(--bdr);
+      padding: 24px;
+      text-align: center;
+      color: var(--t3);
+      font-size: 13px
+    }
+
+    footer span {
+      color: var(--blue);
+      font-weight: 600
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="hdr">
+    <h1>HOGI Academy | School of code 6</h1>
+    <p>Guide JavaScript — Variables · Boucles · Opérateurs · Tableaux &amp; Objets</p>
+    <!-- <div class="pills">
+    <span class="pill">Variables &amp; Types</span>
+    <span class="pill">Boucles for · while · do…while</span>
+    <span class="pill">Tous les opérateurs</span>
+    <span class="pill">Méthodes Arrays &amp; Objects</span>
+  </div> -->
+  </header>
+
+  <main class="wrap">
+
+    <!-- TOC -->
+    <!-- <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#variables">C'est quoi une variable ?</a>
+      <a class="toc-item" href="#types">Types de données</a>
+      <a class="toc-item" href="#boucles">Anatomie des boucles</a>
+      <a class="toc-item" href="#for">Boucle for</a>
+      <a class="toc-item" href="#while">Boucle while</a>
+      <a class="toc-item" href="#dowhile">Boucle do…while</a>
+      <a class="toc-item" href="#operateurs">Tous les opérateurs</a>
+      <a class="toc-item" href="#arrays">Méthodes des Tableaux</a>
+      <a class="toc-item" href="#objects">Méthodes des Objets</a>
+    </div>
+  </div> -->
+
+    <!-- ════════════════════════════
+       PARTIE 1 — VARIABLES
+  ════════════════════════════ -->
+    <div id="variables">
+      <div class="phase-tag">Partie 1</div>
+      <div class="phase-h">C'est quoi une variable ?</div>
+
+      <div class="card">
+        <p>Imagine que la mémoire de ton ordinateur est une <strong>grande étagère avec des boîtes</strong>. Une
+          variable, c'est l'une de ces boîtes. Tu lui donnes :</p>
+        <p>→ un <strong>nom</strong> (pour la retrouver),<br>→ une <strong>valeur</strong> (ce qu'elle contient),<br>→
+          et un <strong>type</strong> (const ou let) si sa contenu peut changer ou non.</p>
+      </div>
+
+      <div class="var-visual">
+        <div class="box-demo">
+          <p style="font-size:12px;color:var(--t3);margin-bottom:8px">Boîte <strong>verrouillée</strong> — const </p>
+          <div class="box-shelf">
+            <span class="box-label">const pays</span>
+            <div class="box-val">"Burundi"</div>
+            <div class="box-type">String</div>
+            <div class="box-lock">❌ Ne peut jamais changer</div>
+          </div>
+        </div>
+        <div class="box-demo">
+          <p style="font-size:12px;color:var(--t3);margin-bottom:8px">Boîte <strong>ouverte</strong> — let </p>
+          <div class="box-shelf" style="border-color:var(--green)">
+            <span class="box-label" style="color:var(--green)">let score</span>
+            <div class="box-val" style="color:var(--green)">10</div>
+            <div class="box-type">Number</div>
+            <div class="box-lock" style="color:var(--green)">✅ Peut être modifiée</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cb">
+        <div class="cb-h"><span class="cb-lang">Déclarer et utiliser des variables</span>
+          <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+              style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+        </div>
+        <pre><span class="cm">// ─── const : valeur fixe, ne change JAMAIS</span>
+<span class="kw">const</span> <span class="vr">pays</span>        <span class="op">=</span> <span class="str">"Burundi"</span><span class="op">;</span>
+<span class="kw">const</span> <span class="vr">PI</span>          <span class="op">=</span> <span class="nm">3.14</span><span class="op">;</span>
+<span class="cm">// pays = "Rwanda"; ← ERREUR TypeError !</span>
+
+<span class="cm">// ─── let : valeur modifiable</span>
+<span class="kw">let</span> <span class="vr">score</span>         <span class="op">=</span> <span class="nm">10</span><span class="op">;</span>
+<span class="vr">score</span>             <span class="op">=</span> <span class="nm">25</span><span class="op">;</span>   <span class="cm">//  OK, score vaut maintenant 25</span>
+
+<span class="cm">// ─── typeof : connaître le type d'une variable</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="kw">typeof</span> <span class="vr">pays</span><span class="op">);</span>   <span class="cm">// "string"</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="kw">typeof</span> <span class="vr">score</span><span class="op">);</span>  <span class="cm">// "number"</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="kw">typeof</span> <span class="kw">true</span><span class="op">);</span>   <span class="cm">// "boolean"</span></pre>
+      </div>
+    </div>
+
+    <!-- TYPES -->
+    <div id="types">
+      <div class="sec-h">Les types de données</div>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Ce que ça représente</th>
+            <th>Exemples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>String</td>
+            <td>Du texte, entre guillemets simples, doubles ou backticks</td>
+            <td><code>"Jean"</code> <code>'Salut'</code> <code>`Bonjour`</code></td>
+          </tr>
+          <tr>
+            <td>Number</td>
+            <td>N'importe quel nombre, entier ou décimal</td>
+            <td><code>42</code> <code>3.14</code> <code>-7</code></td>
+          </tr>
+          <tr>
+            <td>Boolean</td>
+            <td>Uniquement vrai ou faux — pour les décisions</td>
+            <td><code>true</code> <code>false</code></td>
+          </tr>
+          <tr>
+            <td>Undefined</td>
+            <td>Variable déclarée mais sans valeur assignée</td>
+            <td><code>let x;</code> → <code>undefined</code></td>
+          </tr>
+          <tr>
+            <td>Null</td>
+            <td>Absence intentionnelle de valeur (on le choisit)</td>
+            <td><code>let vide = null;</code></td>
+          </tr>
+          <tr>
+            <td>Array</td>
+            <td>Une liste ordonnée d'éléments</td>
+            <td><code>["Mangue", "Banane"]</code></td>
+          </tr>
+          <tr>
+            <td>Object</td>
+            <td>Un ensemble de paires clé : valeur</td>
+            <td><code>{ nom: "Jean", age: 25 }</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- ════════════════════════════
+       PARTIE 2 — BOUCLES
+  ════════════════════════════ -->
+    <div id="boucles">
+      <div class="phase-tag">Partie 2</div>
+      <div class="phase-h">Les Boucles</div>
+
+      <div class="card">
+        <p>Une boucle répète un bloc de code plusieurs fois. </p>
+      </div>
+
+      <div class="loop-box">
+        <div
+          style="font-size:13px;color:var(--t3);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">
+          Anatomie d'une boucle for</div>
+        <div class="loop-line">
+          <span class="lp lp-kw">for</span>
+          <span class="lp lp-pl">&nbsp;(&nbsp;</span>
+          <span class="lp lp-i">let i = 0</span>
+          <span class="lp lp-pl">;&nbsp;</span>
+          <span class="lp lp-c">i &lt;= 5</span>
+          <span class="lp lp-pl">;&nbsp;</span>
+          <span class="lp lp-inc">i++</span>
+          <span class="lp lp-pl">&nbsp;)&nbsp;{ ... }</span>
+        </div>
+        <div class="parts">
+          <div class="part">
+            <div class="part-dot" style="background:var(--var)"></div>
+            <div class="part-body">
+              <div class="pt">① Variable d'induction</div>
+              <div class="pd"><code>let i = 0</code> — le compteur. On le crée ici avec sa valeur de départ. Il évolue à
+                chaque tour de boucle.</div>
+            </div>
+          </div>
+          <div class="part">
+            <div class="part-dot" style="background:var(--str)"></div>
+            <div class="part-body">
+              <div class="pt">② Condition de terminaison</div>
+              <div class="pd"><code>i &lt;= 5</code> — la boucle tourne TANT QUE cette condition est vraie. Dès qu'elle
+                est fausse → la boucle s'arrête.</div>
+            </div>
+          </div>
+          <div class="part">
+            <div class="part-dot" style="background:var(--green)"></div>
+            <div class="part-body">
+              <div class="pt">③ Incrémentation / Décrémentation</div>
+              <div class="pd"><code>i++</code> ajoute 1 après chaque tour. <code>i--</code> enlève 1. Sans ça → boucle
+                infinie !</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOR -->
+    <div id="for">
+      <div class="sec-h">Boucle <code>for</code></div>
+      <p>À utiliser quand on <strong>connaît à l'avance</strong> le nombre de répétitions.</p>
+      <div class="cmp">
+        <div class="cb" style="margin:0">
+          <div class="cb-h"><span class="cb-lang">Incrémentation — i++</span>
+            <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+          </div>
+          <pre><span class="cm">// Compte de 1 à 5</span>
+<span class="kw">for</span> <span class="op">(</span><span class="kw">let</span> <span class="vr">i</span> <span class="op">=</span> <span class="nm">1</span><span class="op">;</span> <span class="vr">i</span> <span class="op">&lt;=</span> <span class="nm">5</span><span class="op">;</span> <span class="vr">i</span><span class="op">++) {</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">i</span><span class="op">);</span>
+<span class="op">}</span>
+<span class="cm">// → 1  2  3  4  5</span></pre>
+        </div>
+        <div class="cb" style="margin:0">
+          <div class="cb-h"><span class="cb-lang">Décrémentation — i--</span>
+            <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+          </div>
+          <pre><span class="cm">// Compte à rebours de 5 à 1</span>
+<span class="kw">for</span> <span class="op">(</span><span class="kw">let</span> <span class="vr">i</span> <span class="op">=</span> <span class="nm">5</span><span class="op">;</span> <span class="vr">i</span> <span class="op">&gt;=</span> <span class="nm">1</span><span class="op">;</span> <span class="vr">i</span><span class="op">--) {</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">i</span><span class="op">);</span>
+<span class="op">}</span>
+<span class="cm">// → 5  4  3  2  1</span></pre>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="cb-h"><span class="cb-lang">Parcourir un tableau avec for</span>
+          <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+              style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+        </div>
+        <pre><span class="kw">const</span> <span class="vr">fruits</span> <span class="op">= [</span><span class="str">"Mangue"</span><span class="op">,</span> <span class="str">"Ananas"</span><span class="op">,</span> <span class="str">"Banane"</span><span class="op">];</span>
+
+<span class="kw">for</span> <span class="op">(</span><span class="kw">let</span> <span class="vr">i</span> <span class="op">=</span> <span class="nm">0</span><span class="op">;</span> <span class="vr">i</span> <span class="op">&lt;</span> <span class="vr">fruits</span><span class="op">.</span><span class="pr">length</span><span class="op">;</span> <span class="vr">i</span><span class="op">++) {</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="str">"Fruit :"</span><span class="op">,</span> <span class="vr">fruits</span><span class="op">[</span><span class="vr">i</span><span class="op">]);</span>
+<span class="op">}</span>
+<span class="cm">// → Fruit : Mangue</span>
+<span class="cm">// → Fruit : Ananas</span>
+<span class="cm">// → Fruit : Banane</span></pre>
+      </div>
+    </div>
+
+    <!-- WHILE -->
+    <div id="while">
+      <div class="sec-h">Boucle <code>while</code></div>
+      <p>À utiliser quand on <strong>ne connaît pas à l'avance</strong> le nombre de répétitions — on tourne tant qu'une
+        condition est vraie.</p>
+      <div class="cb">
+        <div class="cb-h"><span class="cb-lang">Boucle while — exemple</span>
+          <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+              style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+        </div>
+        <pre><span class="kw">let</span> <span class="vr">compteur</span> <span class="op">=</span> <span class="nm">1</span><span class="op">;</span>
+
+<span class="kw">while</span> <span class="op">(</span><span class="vr">compteur</span> <span class="op">&lt;=</span> <span class="nm">3</span><span class="op">) {</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="str">"Tour numéro"</span><span class="op">,</span> <span class="vr">compteur</span><span class="op">);</span>
+  <span class="vr">compteur</span><span class="op">++;</span>   <span class="cm">// INDISPENSABLE pour éviter la boucle infinie</span>
+<span class="op">}</span>
+<span class="cm">// → Tour numéro 1</span>
+<span class="cm">// → Tour numéro 2</span>
+<span class="cm">// → Tour numéro 3</span></pre>
+      </div>
+      <div class="warn">
+        <span class="ico">⚠️</span>
+        <p><strong>Danger :</strong> si tu oublies d'incrémenter le compteur dans un <code>while</code>, la condition ne
+          devient jamais fausse → la boucle tourne à l'infini et bloque le navigateur !</p>
+      </div>
+    </div>
+
+    <!-- DO WHILE -->
+    <div id="dowhile">
+      <div class="sec-h">Boucle <code>do...while</code></div>
+      <div class="card">
+        <p>La grande différence avec <code>while</code> : le bloc de code s'exécute <strong>au moins une fois</strong>,
+          même si la condition est fausse dès le départ. On vérifie la condition <em>après</em> le premier tour.</p>
+      </div>
+      <div class="cmp">
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:16px 18px">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px">while — vérifie AVANT</div>
+          <p style="font-size:13px">Si la condition est fausse dès le départ, le code ne s'exécute <strong
+              style="color:var(--kw)">jamais</strong>.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--green);border-radius:10px;padding:16px 18px">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px">do…while — vérifie APRÈS</div>
+          <p style="font-size:13px">Le code s'exécute <strong style="color:var(--green)">toujours au moins une
+              fois</strong>, puis vérifie la condition.</p>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="cb-h"><span class="cb-lang">do...while — structure et exemple</span>
+          <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+              style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+        </div>
+        <pre><span class="cm">// Structure</span>
+<span class="kw">do</span> <span class="op">{</span>
+  <span class="cm">// code exécuté au moins une fois</span>
+<span class="op">}</span> <span class="kw">while</span> <span class="op">(</span><span class="cm">/* condition */</span><span class="op">);</span>
+
+<span class="cm">// ─── Exemple concret : demander un mot de passe</span>
+<span class="kw">let</span> <span class="vr">tentative</span> <span class="op">=</span> <span class="nm">0</span><span class="op">;</span>
+
+<span class="kw">do</span> <span class="op">{</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="str">"Essai numéro"</span><span class="op">,</span> <span class="vr">tentative</span> <span class="op">+</span> <span class="nm">1</span><span class="op">);</span>
+  <span class="vr">tentative</span><span class="op">++;</span>
+<span class="op">}</span> <span class="kw">while</span> <span class="op">(</span><span class="vr">tentative</span> <span class="op">&lt;</span> <span class="nm">3</span><span class="op">);</span>
+
+<span class="cm">// → Essai numéro 1</span>
+<span class="cm">// → Essai numéro 2</span>
+<span class="cm">// → Essai numéro 3</span>
+
+<span class="cm">// ─── Même avec condition fausse dès le départ :</span>
+<span class="kw">let</span> <span class="vr">x</span> <span class="op">=</span> <span class="nm">10</span><span class="op">;</span>
+<span class="kw">do</span> <span class="op">{</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="str">"Exécuté quand même !"</span><span class="op">);</span>
+<span class="op">}</span> <span class="kw">while</span> <span class="op">(</span><span class="vr">x</span> <span class="op">&lt;</span> <span class="nm">5</span><span class="op">);</span>   <span class="cm">// condition fausse, mais...</span>
+<span class="cm">// → "Exécuté quand même !" (une seule fois)</span></pre>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ════════════════════════════
+       PARTIE 3 — OPÉRATEURS
+  ════════════════════════════ -->
+    <div id="operateurs">
+      <div class="phase-tag">Partie 3</div>
+      <div class="phase-h">Les Opérateurs</div>
+
+      <!-- ARITHMÉTIQUES -->
+      <div class="sec-h">Opérateurs Arithmétiques</div>
+      <p>Servent à <strong>faire des calculs</strong> avec des nombres.</p>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">+</span>
+          <div>
+            <div class="op-name">Addition</div>
+            <div class="op-desc">Additionne deux nombres. Avec des strings : les colle ensemble (concaténation).</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">a</span> <span class="op">=</span> <span class="nm">10</span>
+            <span class="op">+</span> <span class="nm">5</span><span class="op">;</span> <span class="cm">// → <span
+                class="res">15</span></span><br>
+            <span class="kw">let</span> <span class="vr">msg</span> <span class="op">=</span> <span class="str">"Salut
+              "</span> <span class="op">+</span> <span class="str">"Jean"</span><span class="op">;</span> <span
+              class="cm">// → <span class="res">"Salut Jean"</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">-</span>
+          <div>
+            <div class="op-name">Soustraction</div>
+            <!-- <div class="op-desc">Soustrait le second nombre du premier.</div> -->
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">reste</span> <span class="op">=</span> <span
+              class="nm">20</span> <span class="op">-</span> <span class="nm">8</span><span class="op">;</span> <span
+              class="cm">// → <span class="res">12</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">*</span>
+          <div>
+            <div class="op-name">Multiplication</div>
+            <!-- <div class="op-desc">Multiplie deux nombres ensemble.</div> -->
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">produit</span> <span class="op">=</span> <span
+              class="nm">6</span> <span class="op">*</span> <span class="nm">7</span><span class="op">;</span> <span
+              class="cm">// → <span class="res">42</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">/</span>
+          <div>
+            <div class="op-name">Division</div>
+            <!-- <div class="op-desc">Divise le premier nombre par le second.</div> -->
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">div</span> <span class="op">=</span> <span class="nm">15</span>
+            <span class="op">/</span> <span class="nm">3</span><span class="op">;</span> <span class="cm">// → <span
+                class="res">5</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">%</span>
+          <div>
+            <div class="op-name">Modulo (reste)</div>
+            <div class="op-desc">Retourne le reste d'une division entière. Très utile pour savoir si un nombre est pair
+              ou impair.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">r</span> <span class="op">=</span> <span class="nm">10</span>
+            <span class="op">%</span> <span class="nm">3</span><span class="op">;</span> <span class="cm">// → <span
+                class="res">1</span> (10 = 3×3 + 1)</span><br>
+            <span class="kw">let</span> <span class="vr">pair</span> <span class="op">=</span> <span class="nm">8</span>
+            <span class="op">%</span> <span class="nm">2</span><span class="op">;</span> <span class="cm">// → <span
+                class="res">0</span> (8 est pair car reste = 0)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">**</span>
+          <div>
+            <div class="op-name">Puissance</div>
+            <div class="op-desc">Élève un nombre à la puissance d'un autre. Ex : 2³ = 2 ** 3.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">p</span> <span class="op">=</span> <span class="nm">2</span>
+            <span class="op">**</span> <span class="nm">3</span><span class="op">;</span> <span class="cm">// → <span
+                class="res">8</span> (2³)</span><br>
+            <span class="kw">let</span> <span class="vr">p2</span> <span class="op">=</span> <span class="nm">5</span>
+            <span class="op">**</span> <span class="nm">2</span><span class="op">;</span> <span class="cm">// → <span
+                class="res">25</span> (5²)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AFFECTATION -->
+      <div class="sec-h">Opérateurs d'Affectation</div>
+      <p>Servent à <strong>attribuer ou mettre à jour</strong> la valeur d'une variable.</p>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">=</span>
+          <div>
+            <div class="op-name">Assignation simple</div>
+            <div class="op-desc">Affecte une valeur à une variable.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">score</span> <span class="op">=</span> <span
+              class="nm">10</span><span class="op">;</span> <span class="cm">// score vaut <span
+                class="res">10</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">+=</span>
+          <div>
+            <div class="op-name">Addition et assignation</div>
+            <div class="op-desc">Ajoute une valeur à la variable ET la réassigne. Raccourci de <code>x = x + n</code>.
+            </div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">score</span> <span class="op">=</span> <span
+              class="nm">10</span><span class="op">;</span><br>
+            <span class="vr">score</span> <span class="op">+=</span> <span class="nm">5</span><span class="op">;</span>
+            <span class="cm">// score = 10 + 5 → <span class="res">15</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">-=</span>
+          <div>
+            <div class="op-name">Soustraction et assignation</div>
+            <div class="op-desc">Soustrait une valeur de la variable ET la réassigne.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">vie</span> <span class="op">=</span> <span
+              class="nm">100</span><span class="op">;</span><br>
+            <span class="vr">vie</span> <span class="op">-=</span> <span class="nm">20</span><span class="op">;</span>
+            <span class="cm">// vie = 100 - 20 → <span class="res">80</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">*=</span>
+          <div>
+            <div class="op-name">Multiplication et assignation</div>
+            <div class="op-desc">Multiplie la variable par une valeur ET la réassigne.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">prix</span> <span class="op">=</span> <span
+              class="nm">50</span><span class="op">;</span><br>
+            <span class="vr">prix</span> <span class="op">*=</span> <span class="nm">2</span><span class="op">;</span>
+            <span class="cm">// prix = 50 × 2 → <span class="res">100</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">++ --</span>
+          <div>
+            <div class="op-name">Incrémentation / Décrémentation</div>
+            <div class="op-desc">Ajoute ou enlève exactement 1. Raccourcis très utilisés dans les boucles.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">i</span> <span class="op">=</span> <span
+              class="nm">5</span><span class="op">;</span><br>
+            <span class="vr">i</span><span class="op">++;</span> <span class="cm">// i = 5 + 1 → <span
+                class="res">6</span> (équivaut à i += 1)</span><br>
+            <span class="vr">i</span><span class="op">--;</span> <span class="cm">// i = 6 - 1 → <span
+                class="res">5</span> (équivaut à i -= 1)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARAISON -->
+      <div class="sec-h">Opérateurs de Comparaison</div>
+      <p>Comparent deux valeurs et retournent toujours <code>true</code> ou <code>false</code>. Utilisés dans les
+        <code>if</code> et les boucles.</p>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">==</span>
+          <div>
+            <div class="op-name">Égalité de valeur (souple)</div>
+            <div class="op-desc">Vérifie si les valeurs sont égales, mais <strong>ignore le type</strong>. Peut donner
+              des résultats surprenants.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">==</span> <span class="str">"5"</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">true</span> ⚠️ nombre == string !</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">===</span>
+          <div>
+            <div class="op-name">Égalité stricte ✅ Recommandée</div>
+            <div class="op-desc">Vérifie valeur ET type en même temps. Toujours préférer ceci.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">===</span> <span class="nm">5</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">true</span> </span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">===</span> <span class="str">"5"</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">false</span>  (types différents)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">!= !==</span>
+          <div>
+            <div class="op-name">Inégalité (souple / stricte)</div>
+            <div class="op-desc">!= ignore le type, !== vérifie aussi le type. Préférer
+              !==.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">!==</span> <span class="nm">10</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">true</span> (5 et 10 sont
+              différents)</span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">!==</span> <span class="nm">5</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">false</span> (identiques)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">&gt; &lt;</span>
+          <div>
+            <div class="op-name">Supérieur / Inférieur strict</div>
+            <div class="op-desc">Vérifie si une valeur est strictement plus grande ou plus petite.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">10</span> <span class="op">&gt;</span> <span class="nm">5</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">true</span></span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">3</span> <span class="op">&lt;</span> <span class="nm">8</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">true</span></span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">&gt;</span> <span class="nm">5</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">false</span> (égaux, pas strictement
+              supérieur)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">&gt;= &lt;=</span>
+          <div>
+            <div class="op-name">Supérieur ou égal / Inférieur ou égal</div>
+            <div class="op-desc">Inclut le cas d'égalité dans la comparaison.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">18</span> <span class="op">&gt;=</span> <span
+              class="nm">18</span><span class="op">);</span> <span class="cm">// → <span class="res">true</span> (18 est
+              bien ≥ 18)</span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="nm">5</span> <span class="op">&lt;=</span> <span class="nm">3</span><span
+              class="op">);</span> <span class="cm">// → <span class="res">false</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGIQUES -->
+      <div class="sec-h">Opérateurs Logiques</div>
+      <p>Combinent plusieurs conditions ensemble. Toujours utilisés dans les <code>if</code>.</p>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">&amp;&amp;</span>
+          <div>
+            <div class="op-name">ET logique (AND)</div>
+            <div class="op-desc">Retourne true uniquement si <strong>toutes les conditions</strong> sont vraies en même
+              temps.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">age</span> <span class="op">=</span> <span
+              class="nm">20</span><span class="op">,</span> <span class="vr">carte</span> <span class="op">=</span>
+            <span class="kw">true</span><span class="op">;</span><br>
+            <span class="kw">if</span> <span class="op">(</span><span class="vr">age</span> <span
+              class="op">&gt;=</span> <span class="nm">18</span> <span class="op">&amp;&amp;</span> <span
+              class="vr">carte</span><span class="op">) {</span><br>
+            &nbsp;&nbsp;<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="str">"Accès autorisé"</span><span class="op">);</span> <span class="cm">//
+              → <span class="res">s'exécute</span> (les deux sont vrais)</span><br>
+            <span class="op">}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">||</span>
+          <div>
+            <div class="op-name">OU logique (OR)</div>
+            <div class="op-desc">Retourne true si <strong>au moins une condition</strong> est vraie.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">admin</span> <span class="op">=</span> <span
+              class="kw">false</span><span class="op">,</span> <span class="vr">proprio</span> <span class="op">=</span>
+            <span class="kw">true</span><span class="op">;</span><br>
+            <span class="kw">if</span> <span class="op">(</span><span class="vr">admin</span> <span class="op">||</span>
+            <span class="vr">proprio</span><span class="op">) {</span><br>
+            &nbsp;&nbsp;<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(</span><span class="str">"Peut modifier"</span><span class="op">);</span> <span class="cm">//
+              → <span class="res">s'exécute</span> (proprio est vrai)</span><br>
+            <span class="op">}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <div class="op-head"><span class="op-sym">!</span>
+          <div>
+            <div class="op-name">NON logique (NOT)</div>
+            <div class="op-desc">Inverse la valeur booléenne : transforme true en false, et false en true.</div>
+          </div>
+        </div>
+        <div class="op-body">
+          <div class="op-ex">
+            <span class="kw">let</span> <span class="vr">connecte</span> <span class="op">=</span> <span
+              class="kw">false</span><span class="op">;</span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(!</span><span class="vr">connecte</span><span class="op">);</span> <span class="cm">// → <span
+                class="res">true</span> (inverse de false)</span><br>
+            <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span
+              class="op">(!</span><span class="kw">true</span><span class="op">);</span> <span class="cm">// → <span
+                class="res">false</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- ════════════════════════════
+       PARTIE 4 — TABLEAUX
+  ════════════════════════════ -->
+    <div id="arrays">
+      <div class="phase-tag">Partie 4</div>
+      <div class="phase-h">Méthodes des Tableaux (Arrays)</div>
+
+      <div class="card">
+        <p>Un tableau est une liste ordonnée. JavaScript offre de nombreuses <strong>méthodes intégrées</strong> pour le
+          manipuler sans avoir à écrire des boucles à la main.</p>
+      </div>
+
+      <!-- push / pop -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.push() &amp; .pop()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Ajouter / Supprimer à la fin</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px"><code>.push()</code> ajoute un élément à la
+            <strong>fin</strong> du tableau. <code>.pop()</code> supprime et retourne le <strong>dernier</strong>
+            élément.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">let</span> <span class="vr">fruits</span> <span class="op">= [</span><span class="str">"Mangue"</span><span class="op">,</span> <span class="str">"Ananas"</span><span class="op">];</span>
+
+<span class="vr">fruits</span><span class="op">.</span><span class="pr">push</span><span class="op">(</span><span class="str">"Banane"</span><span class="op">);</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">fruits</span><span class="op">);</span>  <span class="cm">// → <span class="gr">["Mangue", "Ananas", "Banane"]</span></span>
+
+<span class="kw">let</span> <span class="vr">dernier</span> <span class="op">=</span> <span class="vr">fruits</span><span class="op">.</span><span class="pr">pop</span><span class="op">();</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">dernier</span><span class="op">);</span>  <span class="cm">// → <span class="gr">"Banane"</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">fruits</span><span class="op">);</span>   <span class="cm">// → <span class="gr">["Mangue", "Ananas"]</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- unshift / shift -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.unshift() &amp; .shift()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Ajouter / Supprimer au début</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px"><code>.unshift()</code> ajoute au <strong>début</strong>.
+            <code>.shift()</code> supprime et retourne le <strong>premier</strong> élément.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">let</span> <span class="vr">liste</span> <span class="op">= [</span><span class="str">"B"</span><span class="op">,</span> <span class="str">"C"</span><span class="op">];</span>
+
+<span class="vr">liste</span><span class="op">.</span><span class="pr">unshift</span><span class="op">(</span><span class="str">"A"</span><span class="op">);</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">liste</span><span class="op">);</span>   <span class="cm">// → <span class="gr">["A", "B", "C"]</span></span>
+
+<span class="vr">liste</span><span class="op">.</span><span class="pr">shift</span><span class="op">();</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">liste</span><span class="op">);</span>   <span class="cm">// → <span class="gr">["B", "C"]</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- forEach -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.forEach()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Parcourir chaque élément</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">Exécute une fonction pour <strong>chaque élément</strong> du
+            tableau. Remplace avantageusement la boucle <code>for</code> classique.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">nombres</span> <span class="op">= [</span><span class="nm">1</span><span class="op">,</span> <span class="nm">2</span><span class="op">,</span> <span class="nm">3</span><span class="op">,</span> <span class="nm">4</span><span class="op">];</span>
+
+<span class="vr">nombres</span><span class="op">.</span><span class="pr">forEach</span><span class="op">((</span><span class="vr">n</span><span class="op">) => {</span>
+  <span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">n</span> <span class="op">*</span> <span class="nm">2</span><span class="op">);</span>
+<span class="op">});</span>
+<span class="cm">// → 2   4   6   8</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- map -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.map()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Transformer chaque élément → nouveau
+            tableau</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">Crée un <strong>nouveau tableau</strong> en appliquant une
+            transformation à chaque élément. L'original n'est pas modifié.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">prix</span>    <span class="op">= [</span><span class="nm">100</span><span class="op">,</span> <span class="nm">200</span><span class="op">,</span> <span class="nm">300</span><span class="op">];</span>
+<span class="kw">const</span> <span class="vr">doubles</span> <span class="op">=</span> <span class="vr">prix</span><span class="op">.</span><span class="pr">map</span><span class="op">((</span><span class="vr">p</span><span class="op">) =></span> <span class="vr">p</span> <span class="op">*</span> <span class="nm">2</span><span class="op">);</span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">doubles</span><span class="op">);</span>  <span class="cm">// → <span class="gr">[200, 400, 600]</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">prix</span><span class="op">);</span>     <span class="cm">// → <span class="gr">[100, 200, 300]</span> (inchangé)</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- filter -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.filter()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Garder uniquement certains éléments</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">Crée un nouveau tableau avec seulement les éléments qui
+            <strong>satisfont une condition</strong>.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">ages</span>   <span class="op">= [</span><span class="nm">12</span><span class="op">,</span> <span class="nm">20</span><span class="op">,</span> <span class="nm">15</span><span class="op">,</span> <span class="nm">30</span><span class="op">,</span> <span class="nm">8</span><span class="op">];</span>
+<span class="kw">const</span> <span class="vr">adultes</span> <span class="op">=</span> <span class="vr">ages</span><span class="op">.</span><span class="pr">filter</span><span class="op">((</span><span class="vr">a</span><span class="op">) =></span> <span class="vr">a</span> <span class="op">&gt;=</span> <span class="nm">18</span><span class="op">);</span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">adultes</span><span class="op">);</span>  <span class="cm">// → <span class="gr">[20, 30]</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- find / includes / indexOf -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.find() .includes() .indexOf()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Rechercher dans un tableau</span>
+        </div>
+        <div class="mth-body">
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">notes</span> <span class="op">= [</span><span class="nm">12</span><span class="op">,</span> <span class="nm">15</span><span class="op">,</span> <span class="nm">8</span><span class="op">,</span> <span class="nm">18</span><span class="op">];</span>
+
+<span class="cm">// .find() — retourne le 1er élément qui satisfait la condition</span>
+<span class="kw">const</span> <span class="vr">bonne</span> <span class="op">=</span> <span class="vr">notes</span><span class="op">.</span><span class="pr">find</span><span class="op">((</span><span class="vr">n</span><span class="op">) =></span> <span class="vr">n</span> <span class="op">&gt;=</span> <span class="nm">15</span><span class="op">);</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">bonne</span><span class="op">);</span>     <span class="cm">// → <span class="gr">15</span></span>
+
+<span class="cm">// .includes() — est-ce que la valeur existe ? (true/false)</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">notes</span><span class="op">.</span><span class="pr">includes</span><span class="op">(</span><span class="nm">8</span><span class="op">));</span>   <span class="cm">// → <span class="gr">true</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">notes</span><span class="op">.</span><span class="pr">includes</span><span class="op">(</span><span class="nm">20</span><span class="op">));</span>  <span class="cm">// → <span class="gr">false</span></span>
+
+<span class="cm">// .indexOf() — à quel index se trouve la valeur ? (-1 si absent)</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">notes</span><span class="op">.</span><span class="pr">indexOf</span><span class="op">(</span><span class="nm">18</span><span class="op">));</span>  <span class="cm">// → <span class="gr">3</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- reduce -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.reduce()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Réduire à une seule valeur</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">Parcourt tout le tableau et <strong>accumule</strong> un
+            résultat unique (somme, total, etc.).</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple — calculer le total</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">prix</span>  <span class="op">= [</span><span class="nm">50</span><span class="op">,</span> <span class="nm">30</span><span class="op">,</span> <span class="nm">20</span><span class="op">];</span>
+<span class="kw">const</span> <span class="vr">total</span> <span class="op">=</span> <span class="vr">prix</span><span class="op">.</span><span class="pr">reduce</span><span class="op">((</span><span class="vr">acc</span><span class="op">,</span> <span class="vr">p</span><span class="op">) =></span> <span class="vr">acc</span> <span class="op">+</span> <span class="vr">p</span><span class="op">,</span> <span class="nm">0</span><span class="op">);</span>
+<span class="cm">//                          ↑ accumulateur  ↑ valeur de départ</span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">total</span><span class="op">);</span>  <span class="cm">// → <span class="gr">100</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- sort / reverse -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.sort() &amp; .reverse()</span>
+          <span class="mth-badge b-arr">Array</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Trier et inverser</span>
+        </div>
+        <div class="mth-body">
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">lettres</span> <span class="op">= [</span><span class="str">"C"</span><span class="op">,</span> <span class="str">"A"</span><span class="op">,</span> <span class="str">"B"</span><span class="op">];</span>
+<span class="vr">lettres</span><span class="op">.</span><span class="pr">sort</span><span class="op">();</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">lettres</span><span class="op">);</span>   <span class="cm">// → <span class="gr">["A", "B", "C"]</span></span>
+
+<span class="vr">lettres</span><span class="op">.</span><span class="pr">reverse</span><span class="op">();</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">lettres</span><span class="op">);</span>   <span class="cm">// → <span class="gr">["C", "B", "A"]</span></span>
+
+<span class="cm">// Pour trier des nombres correctement :</span>
+<span class="kw">const</span> <span class="vr">n</span> <span class="op">= [</span><span class="nm">30</span><span class="op">,</span> <span class="nm">10</span><span class="op">,</span> <span class="nm">20</span><span class="op">];</span>
+<span class="vr">n</span><span class="op">.</span><span class="pr">sort</span><span class="op">((</span><span class="vr">a</span><span class="op">,</span> <span class="vr">b</span><span class="op">) =></span> <span class="vr">a</span> <span class="op">-</span> <span class="vr">b</span><span class="op">);</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">n</span><span class="op">);</span>          <span class="cm">// → <span class="gr">[10, 20, 30]</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- ════════════════════════════
+       PARTIE 5 — OBJETS
+  ════════════════════════════ -->
+    <div id="objects">
+      <div class="phase-tag">Partie 5</div>
+      <div class="phase-h">Méthodes des Objets</div>
+
+      <div class="card">
+        <p>Les objets stockent des données sous forme de <strong>clé : valeur</strong>. JavaScript propose plusieurs
+          méthodes pour les explorer et les manipuler facilement.</p>
+      </div>
+
+      <!-- Object.keys / values / entries -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">Object.keys() .values() .entries()</span>
+          <span class="mth-badge b-obj">Object</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">Transforment un objet en tableau pour pouvoir le parcourir
+            facilement.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">user</span> <span class="op">= {</span> <span class="pr">nom</span><span class="op">:</span> <span class="str">"Jean"</span><span class="op">,</span> <span class="pr">age</span><span class="op">:</span> <span class="nm">25</span><span class="op">,</span> <span class="pr">ville</span><span class="op">:</span> <span class="str">"Bujumbura"</span> <span class="op">};</span>
+
+<span class="cm">// Object.keys() — tableau des clés</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="fn">Object</span><span class="op">.</span><span class="pr">keys</span><span class="op">(</span><span class="vr">user</span><span class="op">));</span>
+<span class="cm">// → <span class="gr">["nom", "age", "ville"]</span></span>
+
+<span class="cm">// Object.values() — tableau des valeurs</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="fn">Object</span><span class="op">.</span><span class="pr">values</span><span class="op">(</span><span class="vr">user</span><span class="op">));</span>
+<span class="cm">// → <span class="gr">["Jean", 25, "Bujumbura"]</span></span>
+
+<span class="cm">// Object.entries() — tableau de paires [clé, valeur]</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="fn">Object</span><span class="op">.</span><span class="pr">entries</span><span class="op">(</span><span class="vr">user</span><span class="op">));</span>
+<span class="cm">// → <span class="gr">[["nom","Jean"], ["age",25], ["ville","Bujumbura"]]</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ajouter / modifier / supprimer -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">Ajouter · Modifier · Supprimer une propriété</span>
+          <span class="mth-badge b-obj">Object</span>
+        </div>
+        <div class="mth-body">
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">user</span> <span class="op">= {</span> <span class="pr">nom</span><span class="op">:</span> <span class="str">"Jean"</span><span class="op">,</span> <span class="pr">age</span><span class="op">:</span> <span class="nm">25</span> <span class="op">};</span>
+
+<span class="cm">// Ajouter une nouvelle propriété</span>
+<span class="vr">user</span><span class="op">.</span><span class="pr">ville</span> <span class="op">=</span> <span class="str">"Bujumbura"</span><span class="op">;</span>
+
+<span class="cm">// Modifier une propriété existante</span>
+<span class="vr">user</span><span class="op">.</span><span class="pr">age</span> <span class="op">=</span> <span class="nm">26</span><span class="op">;</span>
+
+<span class="cm">// Supprimer une propriété</span>
+<span class="kw">delete</span> <span class="vr">user</span><span class="op">.</span><span class="pr">ville</span><span class="op">;</span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">user</span><span class="op">);</span>  <span class="cm">// → <span class="gr">{ nom: "Jean", age: 26 }</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spread operator -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">Spread operator { ...objet }</span>
+          <span class="mth-badge b-obj">Object</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Copier &amp; fusionner des objets</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">L'opérateur <code>...</code> permet de <strong>copier</strong>
+            ou <strong>fusionner</strong> des objets proprement, sans modifier l'original.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">base</span>   <span class="op">= {</span> <span class="pr">nom</span><span class="op">:</span> <span class="str">"Jean"</span><span class="op">,</span> <span class="pr">age</span><span class="op">:</span> <span class="nm">25</span> <span class="op">};</span>
+<span class="kw">const</span> <span class="vr">extra</span>  <span class="op">= {</span> <span class="pr">ville</span><span class="op">:</span> <span class="str">"Bujumbura"</span><span class="op">,</span> <span class="pr">job</span><span class="op">:</span> <span class="str">"Dev"</span> <span class="op">};</span>
+
+<span class="cm">// Copier un objet</span>
+<span class="kw">const</span> <span class="vr">copie</span>  <span class="op">= {</span> <span class="op">...</span><span class="vr">base</span> <span class="op">};</span>
+
+<span class="cm">// Fusionner deux objets</span>
+<span class="kw">const</span> <span class="vr">complet</span> <span class="op">= {</span> <span class="op">...</span><span class="vr">base</span><span class="op">,</span> <span class="op">...</span><span class="vr">extra</span> <span class="op">};</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">complet</span><span class="op">);</span>
+<span class="cm">// → <span class="gr">{ nom: "Jean", age: 25, ville: "Bujumbura", job: "Dev" }</span></span>
+
+<span class="cm">// Modifier une propriété en copiant</span>
+<span class="kw">const</span> <span class="vr">misAJour</span> <span class="op">= {</span> <span class="op">...</span><span class="vr">base</span><span class="op">,</span> <span class="pr">age</span><span class="op">:</span> <span class="nm">30</span> <span class="op">};</span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">misAJour</span><span class="op">);</span>  <span class="cm">// → <span class="gr">{ nom: "Jean", age: 30 }</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Destructuring -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">Déstructuration const { clé } = objet</span>
+          <span class="mth-badge b-obj">Object</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Extraire des propriétés rapidement</span>
+        </div>
+        <div class="mth-body">
+          <p style="font-size:13.5px;margin-bottom:10px">Permet d'extraire des propriétés d'un objet directement dans
+            des variables, sans répéter <code>objet.propriete</code> partout.</p>
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">user</span> <span class="op">= {</span> <span class="pr">nom</span><span class="op">:</span> <span class="str">"Jean"</span><span class="op">,</span> <span class="pr">age</span><span class="op">:</span> <span class="nm">25</span><span class="op">,</span> <span class="pr">ville</span><span class="op">:</span> <span class="str">"Bujumbura"</span> <span class="op">};</span>
+
+<span class="cm">// Sans déstructuration (verbeux)</span>
+<span class="kw">const</span> <span class="vr">nom1</span>  <span class="op">=</span> <span class="vr">user</span><span class="op">.</span><span class="pr">nom</span><span class="op">;</span>
+<span class="kw">const</span> <span class="vr">age1</span>  <span class="op">=</span> <span class="vr">user</span><span class="op">.</span><span class="pr">age</span><span class="op">;</span>
+
+<span class="cm">// Avec déstructuration (propre et rapide)</span>
+<span class="kw">const</span> <span class="op">{</span> <span class="vr">nom</span><span class="op">,</span> <span class="vr">age</span><span class="op">,</span> <span class="vr">ville</span> <span class="op">} =</span> <span class="vr">user</span><span class="op">;</span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">nom</span><span class="op">);</span>    <span class="cm">// → <span class="gr">"Jean"</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">age</span><span class="op">);</span>    <span class="cm">// → <span class="gr">25</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">ville</span><span class="op">);</span>  <span class="cm">// → <span class="gr">"Bujumbura"</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- hasOwnProperty / in -->
+      <div class="mth-card">
+        <div class="mth-head">
+          <span class="mth-name">.hasOwnProperty() &amp; "clé" in objet</span>
+          <span class="mth-badge b-obj">Object</span>
+          <span class="mth-desc" style="font-size:13px;color:var(--t3)">Vérifier l'existence d'une propriété</span>
+        </div>
+        <div class="mth-body">
+          <div class="cb" style="margin:0">
+            <div class="cb-h"><span class="cb-lang">Exemple</span>
+              <div class="dots"><span class="d" style="background:#f85149"></span><span class="d"
+                  style="background:#d29922"></span><span class="d" style="background:#3fb950"></span></div>
+            </div>
+            <pre><span class="kw">const</span> <span class="vr">user</span> <span class="op">= {</span> <span class="pr">nom</span><span class="op">:</span> <span class="str">"Jean"</span><span class="op">,</span> <span class="pr">age</span><span class="op">:</span> <span class="nm">25</span> <span class="op">};</span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">user</span><span class="op">.</span><span class="pr">hasOwnProperty</span><span class="op">(</span><span class="str">"nom"</span><span class="op">));</span>    <span class="cm">// → <span class="gr">true</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="vr">user</span><span class="op">.</span><span class="pr">hasOwnProperty</span><span class="op">(</span><span class="str">"email"</span><span class="op">));</span>  <span class="cm">// → <span class="gr">false</span></span>
+
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="str">"age"</span>   <span class="kw">in</span> <span class="vr">user</span><span class="op">);</span>   <span class="cm">// → <span class="gr">true</span></span>
+<span class="fn">console</span><span class="op">.</span><span class="pr">log</span><span class="op">(</span><span class="str">"email"</span> <span class="kw">in</span> <span class="vr">user</span><span class="op">);</span>   <span class="cm">// → <span class="gr">false</span></span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="info">
+        <span class="ico">🛠️</span>
+        <p><strong>Astuce pratique :</strong> Appuie sur <code>F12</code> dans ton navigateur → onglet
+          <strong>Console</strong> → colle n'importe quel exemple et appuie sur <kbd>Entrée</kbd> pour voir le résultat
+          immédiatement.</p>
+      </div> -->
+
+    </div>
+
+  </main>
+
+  <footer>
+    <span>HOGI Academy</span> · School of code 6 
+  </footer>
+
+</body>
+
+</html>
