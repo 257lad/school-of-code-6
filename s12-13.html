@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOGI Academy | School of code 6</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+    
+        .app {
+            background: #0f1623;
+            min-height: 600px;
+            font-family: 'Inter', sans-serif;
+            padding: 0 0 48px
+        }
+    
+        .hdr {
+            background: linear-gradient(160deg, #0d1b3e, #1a3a7c 50%, #1e2d6b);
+            padding: 90px 20px;
+            text-align: center;
+            border-bottom: 1px solid #4d8ef030
+        }
+    
+        .hdr h1 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff
+        }
+    
+        .hdr p {
+            color: #a8b8d8;
+            font-size: 13px;
+            margin-top: 6px
+        }
+    
+        .progress-bar-wrap {
+            background: #1a2235;
+            height: 6px;
+            margin-top: 16px;
+            border-radius: 3px;
+            overflow: hidden
+        }
+    
+        .progress-bar {
+            height: 6px;
+            background: #4d8ef0;
+            border-radius: 3px;
+            transition: width .4s
+        }
+    
+        .progress-label {
+            font-size: 12px;
+            color: #5a6e8c;
+            margin-top: 6px
+        }
+    
+        .content-area {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+    
+        .chapter-nav {
+            display: flex;
+            gap: 10px;
+            padding: 24px 0 8px;
+            overflow-x: auto
+        }
+    
+        .ch-btn {
+            background: #1a2235;
+            border: 1px solid #2a3a5c;
+            color: #a8b8d8;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all .2s;
+            font-weight: 500
+        }
+    
+        .ch-btn.active {
+            background: #4d8ef0;
+            border-color: #4d8ef0;
+            color: #fff
+        }
+    
+        .ch-btn.locked {
+            opacity: .4;
+            cursor: not-allowed
+        }
+    
+        .ch-btn.done {
+            border-color: #3fb950;
+            color: #3fb950
+        }
+    
+        .section {
+            display: none;
+            padding-top: 20px
+        }
+    
+        .section.visible {
+            display: block
+        }
+    
+        .sec-tag {
+            display: inline-block;
+            background: #4d8ef0;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px
+        }
+    
+        .sec-h {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            border-left: 4px solid #4d8ef0;
+            padding-left: 12px;
+            margin-bottom: 18px
+        }
+    
+        .card {
+            background: #1a2235;
+            border: 1px solid #2a3a5c;
+            border-radius: 12px;
+            padding: 20px 22px;
+            margin-bottom: 14px
+        }
+    
+        .card p {
+            color: #a8b8d8;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 8px
+        }
+    
+        .card p:last-child {
+            margin-bottom: 0
+        }
+    
+        .card strong {
+            color: #fff
+        }
+    
+        .cb {
+            background: #111927;
+            border: 1px solid #2a3a5c;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 12px 0
+        }
+    
+        .cb-h {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 14px;
+            background: #1a2235;
+            border-bottom: 1px solid #2a3a5c
+        }
+    
+        .cb-lang {
+            font-size: 11px;
+            font-weight: 700;
+            color: #5a6e8c;
+            text-transform: uppercase;
+            letter-spacing: .6px
+        }
+    
+        .dots {
+            display: flex;
+            gap: 4px
+        }
+    
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%
+        }
+    
+        pre {
+            padding: 16px 18px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.85;
+            overflow-x: auto;
+            color: #c9d1d9
+        }
+    
+        .kw {
+            color: #ff7b72
+        }
+    
+        .str {
+            color: #a5d6ff
+        }
+    
+        .nm {
+            color: #79c0ff
+        }
+    
+        .cm {
+            color: #4a607a
+        }
+    
+        .fn {
+            color: #d2a8ff
+        }
+    
+        .vr {
+            color: #ffa657
+        }
+    
+        .pr {
+            color: #56d4dd
+        }
+    
+        .gr {
+            color: #3fb950
+        }
+    
+        .concept-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            align-items: flex-start
+        }
+    
+        .c-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: #4d8ef0;
+            flex-shrink: 0;
+            margin-top: 5px
+        }
+    
+        .c-text {
+            font-size: 14px;
+            color: #a8b8d8;
+            line-height: 1.6
+        }
+    
+        .c-text strong {
+            color: #fff
+        }
+    
+        .method-card {
+            background: #1a2235;
+            border: 1px solid #2a3a5c;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px
+        }
+    
+        .mc-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #1e2840;
+            border-bottom: 1px solid #2a3a5c
+        }
+    
+        .mc-name {
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: #56d4dd
+        }
+    
+        .mc-desc {
+            font-size: 12px;
+            color: #5a6e8c;
+            margin-left: auto
+        }
+    
+        .mc-body {
+            padding: 12px 14px
+        }
+    
+        .mc-body p {
+            color: #a8b8d8;
+            font-size: 13.5px;
+            margin-bottom: 8px
+        }
+    
+        .quiz-zone {
+            background: #1a2235;
+            border: 2px solid #4d8ef040;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 28px
+        }
+    
+        .quiz-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #4d8ef0;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+    
+        .quiz-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4d8ef0
+        }
+    
+        .quiz-sub {
+            font-size: 13px;
+            color: #5a6e8c;
+            margin-bottom: 20px
+        }
+    
+        .q-block {
+            margin-bottom: 22px
+        }
+    
+        .q-text {
+            font-size: 14px;
+            color: #e6edf3;
+            margin-bottom: 12px;
+            font-weight: 500;
+            line-height: 1.5
+        }
+    
+        .q-num {
+            color: #4d8ef0;
+            font-weight: 700;
+            margin-right: 6px
+        }
+    
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+    
+        .opt {
+            background: #111927;
+            border: 1px solid #2a3a5c;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            color: #a8b8d8;
+            font-size: 13.5px;
+            text-align: left;
+            transition: all .15s;
+            font-family: inherit;
+            width: 100%
+        }
+    
+        .opt:hover {
+            border-color: #4d8ef0;
+            color: #fff
+        }
+    
+        .opt.correct {
+            background: #3fb95018;
+            border-color: #3fb950;
+            color: #3fb950
+        }
+    
+        .opt.wrong {
+            background: #f8514918;
+            border-color: #f85149;
+            color: #f85149
+        }
+    
+        .opt.disabled {
+            cursor: not-allowed;
+            pointer-events: none
+        }
+    
+        .feedback {
+            font-size: 13px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            line-height: 1.5
+        }
+    
+        .feedback.ok {
+            background: #3fb95015;
+            color: #3fb950;
+            border: 1px solid #3fb95030
+        }
+    
+        .feedback.bad {
+            background: #f8514915;
+            color: #f85149;
+            border: 1px solid #f8514930
+        }
+    
+        .quiz-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #2a3a5c;
+            flex-wrap: gap;
+            gap: 12px
+        }
+    
+        .score-display {
+            font-size: 13px;
+            color: #a8b8d8
+        }
+    
+        .score-display span {
+            color: #fff;
+            font-weight: 700
+        }
+    
+        .submit-btn {
+            background: #4d8ef0;
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: opacity .2s
+        }
+    
+        .submit-btn:disabled {
+            opacity: .4;
+            cursor: not-allowed
+        }
+    
+        .submit-btn:not(:disabled):hover {
+            opacity: .85
+        }
+    
+        .next-btn {
+            background: #3fb950;
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            display: none;
+            transition: opacity .2s
+        }
+    
+        .next-btn:hover {
+            opacity: .85
+        }
+    
+        .pass-banner {
+            background: #3fb95018;
+            border: 1px solid #3fb95040;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 14px;
+            display: none;
+            align-items: center;
+            gap: 10px
+        }
+    
+        .pass-banner.show {
+            display: flex
+        }
+    
+        .pass-icon {
+            width: 20px;
+            height: 20px;
+            background: #3fb950;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0
+        }
+    
+        .pass-text {
+            font-size: 13.5px;
+            color: #3fb950;
+            font-weight: 500
+        }
+    
+        .fail-banner {
+            background: #f8514915;
+            border: 1px solid #f8514930;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 14px;
+            display: none;
+            align-items: center;
+            gap: 10px
+        }
+    
+        .fail-banner.show {
+            display: flex
+        }
+    
+        .fail-text {
+            font-size: 13.5px;
+            color: #f85149
+        }
+    
+        .retry-btn {
+            background: transparent;
+            color: #f85149;
+            border: 1px solid #f8514940;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+            margin-left: auto
+        }
+    
+        .retry-btn:hover {
+            background: #f8514915
+        }
+    
+        .quiz-reminder {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #1e2840;
+            border: 1px solid #4d8ef040;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 24px 0 0;
+            flex-wrap: wrap
+        }
+    
+        .quiz-reminder .reminder-icon {
+            font-size: 22px;
+            flex-shrink: 0
+        }
+    
+        .quiz-reminder .reminder-text {
+            flex: 1;
+            min-width: 160px
+        }
+    
+        .quiz-reminder .reminder-text strong {
+            display: block;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 2px
+        }
+    
+        .quiz-reminder .reminder-text span {
+            color: #a8b8d8;
+            font-size: 13px
+        }
+    
+        .reminder-btn {
+            background: #4d8ef0;
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: opacity .2s;
+            flex-shrink: 0
+        }
+    
+        .reminder-btn:hover {
+            opacity: .85
+        }
+    
+        .quiz-reminder.done-reminder {
+            background: #1a2e1e;
+            border-color: #3fb95040
+        }
+    
+        .quiz-reminder.done-reminder .reminder-icon::after {
+            content: '✓';
+            font-size: 18px
+        }
+    
+        .quiz-reminder.done-reminder .reminder-btn {
+            background: #3fb950
+        }
+    
+        .reset-progress-btn {
+            background: transparent;
+            color: #5a6e8c;
+            border: 1px solid #2a3a5c;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all .2s;
+            margin-top: 10px
+        }
+    
+        .reset-progress-btn:hover {
+            color: #f85149;
+            border-color: #f8514940
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="hdr">
+            <h1>HOGI Academy | School of code 6</h1>
+            <p>Session 12 &amp; 13 — DOM Manipulation · Events · LocalStorage</p>
+            <div style="max-width:500px;margin:0 auto">
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="pbar" style="width:0%"></div>
+                </div>
+                <button class="reset-progress-btn" onclick="resetProgress()">Réinitialiser la progression</button>
+            </div>
+        </div>
+    
+        <div class="content-area">
+            <div class="chapter-nav">
+                <button class="ch-btn active" onclick="goTo(0)" id="nav0">S12 — DOM</button>
+                <button class="ch-btn locked" onclick="goTo(1)" id="nav1">S12 — Events</button>
+                <button class="ch-btn locked" onclick="goTo(2)" id="nav2">S13 — LocalStorage</button>
+    
+            </div>
+    
+            <!-- ═══ SECTION 0 — DOM ═══ -->
+            <div class="section visible" id="sec0">
+                <div class="sec-tag">Session 12</div>
+                <div class="sec-h">DOM Manipulation</div>
+    
+                <div class="card">
+                    <p>Le <strong>DOM (Document Object Model)</strong> est la représentation en mémoire de ta page HTML.
+                        Quand le navigateur charge une page, il transforme chaque balise HTML en un <strong>objet
+                            JavaScript</strong> que tu peux lire et modifier.</p>
+                    <p>Grâce au DOM, tu peux : changer du texte, modifier des styles, ajouter ou supprimer des éléments —
+                        tout ça sans recharger la page.</p>
+                </div>
+    
+                <div class="concept-row">
+                    <div class="c-dot"></div>
+                    <div class="c-text"><strong>Sélectionner un élément</strong> — pour le manipuler, il faut d'abord le
+                        trouver.</div>
+                </div>
+                <div class="cb">
+                    <div class="cb-h"><span class="cb-lang">Sélectionner des éléments</span>
+                        <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                style="background:#d29922"></span><span class="dot" style="background:#3fb950"></span></div>
+                    </div>
+                    <pre><span class="cm">// Par ID — retourne un seul élément</span>
+    <span class="kw">const</span> <span class="vr">titre</span> <span class="cm">=</span> document.<span class="pr">getElementById</span>(<span class="str">'titre'</span>);
+    
+    <span class="cm">// Par classe — retourne une liste</span>
+    <span class="kw">const</span> <span class="vr">cartes</span> <span class="cm">=</span> document.<span class="pr">getElementsByClassName</span>(<span class="str">'carte'</span>);
+    
+    <span class="cm">// Sélecteur CSS — le plus moderne et polyvalent</span>
+    <span class="kw">const</span> <span class="vr">btn</span>   <span class="cm">=</span> document.<span class="pr">querySelector</span>(<span class="str">'#monBtn'</span>);
+    <span class="kw">const</span> <span class="vr">tous</span>  <span class="cm">=</span> document.<span class="pr">querySelectorAll</span>(<span class="str">'.item'</span>);</pre>
+                </div>
+    
+                <div class="concept-row" style="margin-top:14px">
+                    <div class="c-dot"></div>
+                    <div class="c-text"><strong>Modifier le contenu et le style</strong> — une fois sélectionné, on peut
+                        tout changer.</div>
+                </div>
+                <div class="cb">
+                    <div class="cb-h"><span class="cb-lang">Modifier contenu &amp; style</span>
+                        <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                style="background:#d29922"></span><span class="dot" style="background:#3fb950"></span></div>
+                    </div>
+                    <pre><span class="kw">const</span> <span class="vr">el</span> <span class="cm">=</span> document.<span class="pr">querySelector</span>(<span class="str">'#boite'</span>);
+    
+    <span class="cm">// Changer le texte</span>
+    <span class="vr">el</span>.<span class="pr">textContent</span> <span class="cm">=</span> <span class="str">"Nouveau texte"</span>;
+    
+    <span class="cm">// Changer le HTML interne</span>
+    <span class="vr">el</span>.<span class="pr">innerHTML</span> <span class="cm">=</span> <span class="str">"&lt;strong&gt;Texte en gras&lt;/strong&gt;"</span>;
+    
+    <span class="cm">// Modifier le style CSS</span>
+    <span class="vr">el</span>.<span class="pr">style</span>.color <span class="cm">=</span> <span class="str">"blue"</span>;
+    <span class="vr">el</span>.<span class="pr">style</span>.fontSize <span class="cm">=</span> <span class="str">"20px"</span>;
+    
+    <span class="cm">// Ajouter / retirer une classe CSS</span>
+    <span class="vr">el</span>.<span class="pr">classList</span>.<span class="fn">add</span>(<span class="str">'actif'</span>);
+    <span class="vr">el</span>.<span class="pr">classList</span>.<span class="fn">remove</span>(<span class="str">'actif'</span>);
+    <span class="vr">el</span>.<span class="pr">classList</span>.<span class="fn">toggle</span>(<span class="str">'actif'</span>);</pre>
+                </div>
+    
+                <div class="concept-row" style="margin-top:14px">
+                    <div class="c-dot"></div>
+                    <div class="c-text"><strong>Créer et supprimer des éléments</strong> — on peut construire le HTML
+                        dynamiquement.</div>
+                </div>
+                <div class="cb">
+                    <div class="cb-h"><span class="cb-lang">Créer &amp; insérer des éléments</span>
+                        <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                style="background:#d29922"></span><span class="dot" style="background:#3fb950"></span></div>
+                    </div>
+                    <pre><span class="cm">// Créer un nouvel élément</span>
+    <span class="kw">const</span> <span class="vr">li</span> <span class="cm">=</span> document.<span class="pr">createElement</span>(<span class="str">'li'</span>);
+    <span class="vr">li</span>.<span class="pr">textContent</span> <span class="cm">=</span> <span class="str">"Nouvelle tâche"</span>;
+    
+    <span class="cm">// L'ajouter dans le DOM</span>
+    <span class="kw">const</span> <span class="vr">liste</span> <span class="cm">=</span> document.<span class="pr">querySelector</span>(<span class="str">'#maListe'</span>);
+    <span class="vr">liste</span>.<span class="pr">appendChild</span>(<span class="vr">li</span>);
+    
+    <span class="cm">// Supprimer un élément</span>
+    <span class="vr">li</span>.<span class="fn">remove</span>();</pre>
+                </div>
+    
+                <!-- QUIZ REMINDER 0 -->
+                <div class="quiz-reminder" id="reminder0">
+                    <div class="reminder-icon">📝</div>
+                    <div class="reminder-text">
+                        <strong>Quiz obligatoire</strong>
+                        <span>Tu dois réussir le quiz ci-dessous (2/3) pour débloquer la section suivante.</span>
+                    </div>
+                    <button class="reminder-btn"
+                        onclick="document.getElementById('quiz0').scrollIntoView({behavior:'smooth'})">Aller au quiz
+                        ↓</button>
+                </div>
+    
+                <!-- QUIZ 0 -->
+                <div class="quiz-zone" id="quiz0">
+                    <div class="quiz-title">Quiz — DOM Manipulation</div>
+                    <div class="quiz-sub">Réponds aux 3 questions. Il faut 2/3 pour continuer.</div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">1.</span>Quelle méthode retourne <em>un seul</em> élément
+                            par son identifiant HTML ?</div>
+                        <div class="options" id="q0o">
+                            <button class="opt" onclick="pick(0,0,0)">document.querySelector()</button>
+                            <button class="opt" onclick="pick(0,0,1)">document.getElementById()</button>
+                            <button class="opt" onclick="pick(0,0,2)">document.getElementsByClassName()</button>
+                            <button class="opt" onclick="pick(0,0,3)">document.querySelectorAll()</button>
+                        </div>
+                        <div class="feedback" id="fb0-0"></div>
+                    </div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">2.</span>Comment changer le texte d'un élément <code
+                                style="background:#1a2235;padding:1px 5px;border-radius:3px;color:#56d4dd">el</code> ?</div>
+                        <div class="options" id="q1o">
+                            <button class="opt" onclick="pick(0,1,0)">el.value = "texte"</button>
+                            <button class="opt" onclick="pick(0,1,1)">el.text = "texte"</button>
+                            <button class="opt" onclick="pick(0,1,2)">el.textContent = "texte"</button>
+                            <button class="opt" onclick="pick(0,1,3)">el.content = "texte"</button>
+                        </div>
+                        <div class="feedback" id="fb0-1"></div>
+                    </div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">3.</span>Que fait <code
+                                style="background:#1a2235;padding:1px 5px;border-radius:3px;color:#56d4dd">el.classList.toggle('actif')</code>
+                            ?</div>
+                        <div class="options" id="q2o">
+                            <button class="opt" onclick="pick(0,2,0)">Supprime toujours la classe 'actif'</button>
+                            <button class="opt" onclick="pick(0,2,1)">Ajoute toujours la classe 'actif'</button>
+                            <button class="opt" onclick="pick(0,2,2)">Ajoute si absente, supprime si présente</button>
+                            <button class="opt" onclick="pick(0,2,3)">Renomme la classe 'actif'</button>
+                        </div>
+                        <div class="feedback" id="fb0-2"></div>
+                    </div>
+    
+                    <div class="quiz-footer">
+                        <div class="score-display">Score : <span id="s0">0</span> / 3</div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <button class="submit-btn" id="sub0" onclick="submitQuiz(0)" disabled>Valider</button>
+                            <button class="next-btn" id="nxt0" onclick="unlock(1)">Section suivante →</button>
+                        </div>
+                    </div>
+                    <div class="pass-banner" id="pass0">
+                        <div class="pass-icon" style="font-size:12px;color:#fff;font-weight:700">✓</div>
+                        <div class="pass-text">Bravo ! Section validée. Tu peux continuer.</div>
+                    </div>
+                    <div class="fail-banner" id="fail0">
+                        <div class="fail-text">Pas tout à fait — relis la leçon et réessaie !</div><button class="retry-btn"
+                            onclick="resetQuiz(0)">Réessayer</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- ═══ SECTION 1 — EVENTS ═══ -->
+            <div class="section" id="sec1">
+                <div class="sec-tag">Session 12</div>
+                <div class="sec-h">Events — Les Événements</div>
+                <div class="card">
+                    <p>Un <strong>événement</strong> est une action qui se produit dans le navigateur : un clic, une frappe
+                        au clavier, le survol d'un élément... On y réagit avec <code
+                            style="color:#56d4dd">addEventListener</code>.</p>
+                </div>
+    
+                <div class="cb">
+                    <div class="cb-h"><span class="cb-lang">addEventListener — structure de base</span>
+                        <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                style="background:#d29922"></span><span class="dot" style="background:#3fb950"></span></div>
+                    </div>
+                    <pre><span class="vr">element</span>.<span class="pr">addEventListener</span>(<span class="str">'événement'</span>, <span class="kw">function</span>(<span class="vr">e</span>) {
+      <span class="cm">// code à exécuter quand l'événement se produit</span>
+    });</pre>
+                </div>
+    
+                <div class="concept-row" style="margin-top:16px">
+                    <div class="c-dot"></div>
+                    <div class="c-text"><strong>Événements les plus courants</strong></div>
+                </div>
+                <div class="card" style="padding:14px 18px">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                        <div style="font-size:13px;color:#a8b8d8"><span
+                                style="color:#56d4dd;font-family:monospace">click</span> — clic sur un élément</div>
+                        <div style="font-size:13px;color:#a8b8d8"><span
+                                style="color:#56d4dd;font-family:monospace">submit</span> — envoi d'un formulaire</div>
+                        <div style="font-size:13px;color:#a8b8d8"><span
+                                style="color:#56d4dd;font-family:monospace">input</span> — frappe dans un champ</div>
+                        <div style="font-size:13px;color:#a8b8d8"><span
+                                style="color:#56d4dd;font-family:monospace">keydown</span> — touche pressée</div>
+                        <div style="font-size:13px;color:#a8b8d8"><span
+                                style="color:#56d4dd;font-family:monospace">mouseover</span> — survol souris</div>
+                        <div style="font-size:13px;color:#a8b8d8"><span
+                                style="color:#56d4dd;font-family:monospace">DOMContentLoaded</span> — page chargée</div>
+                    </div>
+                </div>
+    
+                <div class="cb">
+                    <div class="cb-h"><span class="cb-lang">Exemples concrets</span>
+                        <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                style="background:#d29922"></span><span class="dot" style="background:#3fb950"></span></div>
+                    </div>
+                    <pre><span class="kw">const</span> <span class="vr">btn</span> <span class="cm">=</span> document.<span class="pr">querySelector</span>(<span class="str">'#monBouton'</span>);
+    
+    <span class="cm">// Événement clic</span>
+    <span class="vr">btn</span>.<span class="pr">addEventListener</span>(<span class="str">'click'</span>, (<span class="vr">e</span>) <span class="cm">=></span> {
+      <span class="fn">console</span>.<span class="pr">log</span>(<span class="str">'Bouton cliqué !'</span>);
+    });
+    
+    <span class="cm">// Récupérer la valeur d'un champ en temps réel</span>
+    <span class="kw">const</span> <span class="vr">input</span> <span class="cm">=</span> document.<span class="pr">querySelector</span>(<span class="str">'#monInput'</span>);
+    <span class="vr">input</span>.<span class="pr">addEventListener</span>(<span class="str">'input'</span>, (<span class="vr">e</span>) <span class="cm">=></span> {
+      <span class="fn">console</span>.<span class="pr">log</span>(<span class="vr">e</span>.<span class="pr">target</span>.value);
+    });
+    
+    <span class="cm">// Empêcher le comportement par défaut (ex: rechargement du form)</span>
+    <span class="kw">const</span> <span class="vr">form</span> <span class="cm">=</span> document.<span class="pr">querySelector</span>(<span class="str">'form'</span>);
+    <span class="vr">form</span>.<span class="pr">addEventListener</span>(<span class="str">'submit'</span>, (<span class="vr">e</span>) <span class="cm">=></span> {
+      <span class="vr">e</span>.<span class="fn">preventDefault</span>();
+      <span class="fn">console</span>.<span class="pr">log</span>(<span class="str">'Formulaire soumis sans rechargement !'</span>);
+    });</pre>
+                </div>
+    
+                <!-- QUIZ REMINDER 1 -->
+                <div class="quiz-reminder" id="reminder1">
+                    <div class="reminder-icon">📝</div>
+                    <div class="reminder-text">
+                        <strong>Quiz obligatoire</strong>
+                        <span>Tu dois réussir le quiz ci-dessous (2/3) pour débloquer la section suivante.</span>
+                    </div>
+                    <button class="reminder-btn"
+                        onclick="document.getElementById('quiz1').scrollIntoView({behavior:'smooth'})">Aller au quiz
+                        ↓</button>
+                </div>
+    
+                <!-- QUIZ 1 -->
+                <div class="quiz-zone" id="quiz1">
+                    <div class="quiz-title">Quiz — Events</div>
+                    <div class="quiz-sub">3 questions. 2/3 minimum pour passer.</div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">1.</span>Quelle méthode utilise-t-on pour écouter un
+                            événement sur un élément ?</div>
+                        <div class="options" id="q3o">
+                            <button class="opt" onclick="pick(1,0,0)">element.on('click', fn)</button>
+                            <button class="opt" onclick="pick(1,0,1)">element.listenEvent('click', fn)</button>
+                            <button class="opt" onclick="pick(1,0,2)">element.addEventListener('click', fn)</button>
+                            <button class="opt" onclick="pick(1,0,3)">element.watch('click', fn)</button>
+                        </div>
+                        <div class="feedback" id="fb1-0"></div>
+                    </div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">2.</span>Que fait <code
+                                style="background:#1a2235;padding:1px 5px;border-radius:3px;color:#56d4dd">e.preventDefault()</code>
+                            dans un événement <code
+                                style="background:#1a2235;padding:1px 5px;border-radius:3px;color:#56d4dd">submit</code> ?
+                        </div>
+                        <div class="options" id="q4o">
+                            <button class="opt" onclick="pick(1,1,0)">Supprime le formulaire du DOM</button>
+                            <button class="opt" onclick="pick(1,1,1)">Empêche le rechargement de la page</button>
+                            <button class="opt" onclick="pick(1,1,2)">Vide les champs du formulaire</button>
+                            <button class="opt" onclick="pick(1,1,3)">Envoie les données au serveur</button>
+                        </div>
+                        <div class="feedback" id="fb1-1"></div>
+                    </div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">3.</span>Quel événement se déclenche à chaque frappe dans un
+                            <code
+                                style="background:#1a2235;padding:1px 5px;border-radius:3px;color:#56d4dd">&lt;input&gt;</code>
+                            ?</div>
+                        <div class="options" id="q5o">
+                            <button class="opt" onclick="pick(1,2,0)">change</button>
+                            <button class="opt" onclick="pick(1,2,1)">type</button>
+                            <button class="opt" onclick="pick(1,2,2)">input</button>
+                            <button class="opt" onclick="pick(1,2,3)">keypress</button>
+                        </div>
+                        <div class="feedback" id="fb1-2"></div>
+                    </div>
+    
+                    <div class="quiz-footer">
+                        <div class="score-display">Score : <span id="s1">0</span> / 3</div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <button class="submit-btn" id="sub1" onclick="submitQuiz(1)" disabled>Valider</button>
+                            <button class="next-btn" id="nxt1" onclick="unlock(2)">Section suivante →</button>
+                        </div>
+                    </div>
+                    <div class="pass-banner" id="pass1">
+                        <div class="pass-icon" style="font-size:12px;color:#fff;font-weight:700">✓</div>
+                        <div class="pass-text">Bravo ! Section validée. Tu peux continuer.</div>
+                    </div>
+                    <div class="fail-banner" id="fail1">
+                        <div class="fail-text">Pas tout à fait — relis la leçon et réessaie !</div><button class="retry-btn"
+                            onclick="resetQuiz(1)">Réessayer</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- ═══ SECTION 2 — LOCALSTORAGE ═══ -->
+            <div class="section" id="sec2">
+                <div class="sec-tag">Session 13</div>
+                <div class="sec-h">LocalStorage</div>
+                <div class="card">
+                    <p>Le <strong>LocalStorage</strong> est un espace de stockage dans le navigateur. Il permet de
+                        <strong>sauvegarder des données</strong> qui persistent même après avoir fermé et rouvert l'onglet —
+                        sans base de données ni serveur.</p>
+                    <p>Limite : les données sont sous forme de <strong>texte uniquement</strong>. Pour stocker des objets ou
+                        tableaux, il faut les convertir avec <code style="color:#56d4dd">JSON.stringify()</code> et les
+                        relire avec <code style="color:#56d4dd">JSON.parse()</code>.</p>
+                </div>
+    
+                <div class="method-card">
+                    <div class="mc-head"><span class="mc-name">localStorage.setItem(clé, valeur)</span><span
+                            class="mc-desc">Sauvegarder</span></div>
+                    <div class="mc-body">
+                        <div class="cb" style="margin:0">
+                            <div class="cb-h"><span class="cb-lang">Exemple</span>
+                                <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                        style="background:#d29922"></span><span class="dot"
+                                        style="background:#3fb950"></span></div>
+                            </div>
+                            <pre><span class="cm">// Valeur simple</span>
+    localStorage.<span class="pr">setItem</span>(<span class="str">'prenom'</span>, <span class="str">'Jean'</span>);
+    
+    <span class="cm">// Tableau ou objet → JSON.stringify()</span>
+    <span class="kw">const</span> <span class="vr">taches</span> <span class="cm">=</span> [<span class="str">'Coder'</span>, <span class="str">'Tester'</span>];
+    localStorage.<span class="pr">setItem</span>(<span class="str">'taches'</span>, <span class="fn">JSON</span>.<span class="pr">stringify</span>(<span class="vr">taches</span>));</pre>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="method-card">
+                    <div class="mc-head"><span class="mc-name">localStorage.getItem(clé)</span><span
+                            class="mc-desc">Lire</span></div>
+                    <div class="mc-body">
+                        <div class="cb" style="margin:0">
+                            <div class="cb-h"><span class="cb-lang">Exemple</span>
+                                <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                        style="background:#d29922"></span><span class="dot"
+                                        style="background:#3fb950"></span></div>
+                            </div>
+                            <pre><span class="kw">const</span> <span class="vr">prenom</span> <span class="cm">=</span> localStorage.<span class="pr">getItem</span>(<span class="str">'prenom'</span>);
+    <span class="fn">console</span>.<span class="pr">log</span>(<span class="vr">prenom</span>);  <span class="cm">// → <span class="gr">"Jean"</span></span>
+    
+    <span class="cm">// Tableau → JSON.parse() pour retrouver le vrai tableau</span>
+    <span class="kw">const</span> <span class="vr">sauvegarde</span> <span class="cm">=</span> localStorage.<span class="pr">getItem</span>(<span class="str">'taches'</span>);
+    <span class="kw">const</span> <span class="vr">taches</span> <span class="cm">=</span> <span class="fn">JSON</span>.<span class="pr">parse</span>(<span class="vr">sauvegarde</span>);
+    <span class="fn">console</span>.<span class="pr">log</span>(<span class="vr">taches</span>);  <span class="cm">// → <span class="gr">["Coder", "Tester"]</span></span></pre>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="method-card">
+                    <div class="mc-head"><span class="mc-name">localStorage.removeItem(clé) &amp; .clear()</span><span
+                            class="mc-desc">Supprimer</span></div>
+                    <div class="mc-body">
+                        <div class="cb" style="margin:0">
+                            <div class="cb-h"><span class="cb-lang">Exemple</span>
+                                <div class="dots"><span class="dot" style="background:#f85149"></span><span class="dot"
+                                        style="background:#d29922"></span><span class="dot"
+                                        style="background:#3fb950"></span></div>
+                            </div>
+                            <pre><span class="cm">// Supprimer une clé</span>
+    localStorage.<span class="pr">removeItem</span>(<span class="str">'prenom'</span>);
+    
+    <span class="cm">// Tout effacer</span>
+    localStorage.<span class="fn">clear</span>();</pre>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- QUIZ REMINDER 2 -->
+                <div class="quiz-reminder" id="reminder2">
+                    <div class="reminder-icon">📝</div>
+                    <div class="reminder-text">
+                        <strong>Quiz obligatoire</strong>
+                        <span>Tu dois réussir le quiz ci-dessous (2/3) pour débloquer la section suivante.</span>
+                    </div>
+                    <button class="reminder-btn"
+                        onclick="document.getElementById('quiz2').scrollIntoView({behavior:'smooth'})">Aller au quiz
+                        ↓</button>
+                </div>
+    
+                <!-- QUIZ 2 -->
+                <div class="quiz-zone" id="quiz2">
+                    <div class="quiz-title">Quiz — LocalStorage</div>
+                    <div class="quiz-sub">3 questions. 2/3 pour continuer.</div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">1.</span>Pourquoi utilise-t-on <code
+                                style="background:#1a2235;padding:1px 5px;border-radius:3px;color:#56d4dd">JSON.stringify()</code>
+                            avant de sauvegarder un tableau ?</div>
+                        <div class="options" id="q6o">
+                            <button class="opt" onclick="pick(2,0,0)">Pour compresser les données</button>
+                            <button class="opt" onclick="pick(2,0,1)">Pour le convertir en texte, car LocalStorage ne stocke
+                                que du texte</button>
+                            <button class="opt" onclick="pick(2,0,2)">Pour crypter les données</button>
+                            <button class="opt" onclick="pick(2,0,3)">C'est optionnel, on peut stocker directement</button>
+                        </div>
+                        <div class="feedback" id="fb2-0"></div>
+                    </div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">2.</span>Quelle méthode lit une valeur dans le LocalStorage
+                            ?</div>
+                        <div class="options" id="q7o">
+                            <button class="opt" onclick="pick(2,1,0)">localStorage.read('clé')</button>
+                            <button class="opt" onclick="pick(2,1,1)">localStorage.fetch('clé')</button>
+                            <button class="opt" onclick="pick(2,1,2)">localStorage.getItem('clé')</button>
+                            <button class="opt" onclick="pick(2,1,3)">localStorage.getValue('clé')</button>
+                        </div>
+                        <div class="feedback" id="fb2-1"></div>
+                    </div>
+    
+                    <div class="q-block">
+                        <div class="q-text"><span class="q-num">3.</span>Que se passe-t-il si on ferme et rouvre l'onglet —
+                            les données LocalStorage sont-elles perdues ?</div>
+                        <div class="options" id="q8o">
+                            <button class="opt" onclick="pick(2,2,0)">Oui, elles sont toujours effacées</button>
+                            <button class="opt" onclick="pick(2,2,1)">Non, elles persistent jusqu'à suppression
+                                explicite</button>
+                            <button class="opt" onclick="pick(2,2,2)">Elles persistent seulement pendant 24h</button>
+                            <button class="opt" onclick="pick(2,2,3)">Ça dépend du navigateur</button>
+                        </div>
+                        <div class="feedback" id="fb2-2"></div>
+                    </div>
+    
+                    <!-- <div class="quiz-footer">
+                        <div class="score-display">Score : <span id="s3">0</span> / 3</div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <button class="submit-btn" id="sub3" onclick="submitQuiz(3)" disabled>Valider</button>
+                            <button class="next-btn" id="nxt3" onclick="finishCourse()">Terminer le cours ✓</button>
+                        </div>
+                    </div>
+                    <div class="pass-banner" id="pass3">
+                        <div class="pass-icon" style="font-size:12px;color:#fff;font-weight:700">✓</div>
+                        <div class="pass-text">Excellent ! Sessions 12 &amp; 13 complètes. Tu maîtrises le DOM, les Events
+                            et le LocalStorage !</div>
+                    </div>
+                    <div class="fail-banner" id="fail3">
+                        <div class="fail-text">Pas tout à fait — relis la leçon et réessaie !</div><button class="retry-btn"
+                            onclick="resetQuiz(3)">Réessayer</button>
+                    </div> -->
+    
+                    <div class="quiz-footer">
+                        <div class="score-display">Score : <span id="s2">0</span> / 3</div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <button class="submit-btn" id="sub2" onclick="submitQuiz(2)" disabled>Valider</button>
+                            <button class="next-btn" id="nxt2" onclick="finishCourse()">Terminer le cours</button>
+                        </div>
+                    </div>
+                    <div class="pass-banner" id="pass2">
+                        <div class="pass-icon" style="font-size:12px;color:#fff;font-weight:700">✓</div>
+                        <div class="pass-text">Bravo ! Cours terminé</div>
+                    </div>
+                    <div class="fail-banner" id="fail2">
+                        <div class="fail-text">Pas tout à fait — relis la leçon et réessaie !</div><button class="retry-btn"
+                            onclick="resetQuiz(2)">Réessayer</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- ═══ SECTION 3 — TODO APP ═══ -->
+    
+            <!-- FINAL BANNER -->
+            <!-- <div id="finalBanner"
+                style="display:none;background:#1a2235;border:2px solid #3fb95040;border-radius:14px;padding:28px 24px;margin-top:32px;text-align:center">
+                <div style="font-size:32px;margin-bottom:12px">🎓</div>
+                <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px">Sessions 12 &amp; 13 — Complétées !
+                </div>
+                <div style="font-size:14px;color:#a8b8d8;margin-bottom:20px">Tu connais maintenant le DOM, les événements,
+                    le LocalStorage et tu peux construire une To-Do App complète.</div>
+                <button
+                    onclick="sendPrompt('Je veux aller plus loin sur la To-Do App — comment ajouter un filtre actif/complété et des animations CSS ?')"
+                    style="background:#4d8ef0;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Aller
+                    plus loin ↗</button>
+            </div> -->
+        </div>
+    </div>
+    
+    <script>
+        const CORRECT = [1, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 2];
+        const EXPLAIN = [
+            "getElementById() recherche par l'attribut id et retourne un seul élément.",
+            "textContent permet de modifier le contenu texte d'un élément.",
+            "toggle() ajoute la classe si elle est absente, et la supprime si elle est présente.",
+            "addEventListener() est la méthode standard pour attacher un écouteur d'événement.",
+            "preventDefault() annule le comportement par défaut du navigateur, ici le rechargement.",
+            "L'événement 'input' se déclenche à chaque modification du champ, en temps réel.",
+            "LocalStorage stocke uniquement du texte, donc les objets/tableaux doivent être sérialisés.",
+            "getItem() lit la valeur associée à la clé donnée.",
+            "Les données LocalStorage persistent jusqu'à suppression explicite ou vidage du navigateur.",
+            "|| [] assure qu'on commence avec un tableau vide si aucune donnée n'est encore sauvegardée.",
+            "Les deux appels ont des rôles différents : affichage initial + mise à jour après ajout.",
+            "splice(index, 1) retire 1 élément à la position donnée, modifiant le tableau original."
+        ];
+    
+        const LS_KEY = 'hogi_s12s13_progress';
+    
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(LS_KEY);
+                if (saved) return JSON.parse(saved);
+            } catch (e) { }
+            return null;
+        }
+    
+        function saveState() {
+            try {
+                localStorage.setItem(LS_KEY, JSON.stringify({
+                    answers: state.answers,
+                    submitted: state.submitted,
+                    unlocked: state.unlocked,
+                    completed: state.completed,
+                    current: state.current
+                }));
+            } catch (e) { }
+        }
+    
+        const saved = loadState();
+        const state = {
+            answers: saved ? saved.answers : Array(12).fill(null),
+            submitted: saved ? saved.submitted : [false, false, false, false],
+            unlocked: saved ? saved.unlocked : [true, false, false, false],
+            completed: saved ? saved.completed : [false, false, false, false],
+            current: saved ? saved.current : 0
+        };
+    
+        function pick(secIdx, qIdx, optIdx) {
+            const globalIdx = secIdx * 3 + qIdx;
+            if (state.submitted[secIdx]) return;
+            state.answers[globalIdx] = optIdx;
+            const allOpts = document.getElementById('q' + globalIdx + 'o');
+            if (!allOpts) return;
+            allOpts.querySelectorAll('.opt').forEach((o, i) => {
+                o.classList.remove('correct', 'wrong');
+                if (i === optIdx) o.classList.add(optIdx === CORRECT[globalIdx] ? 'correct' : 'wrong');
+            });
+            const fb = document.getElementById(`fb${secIdx}-${qIdx}`);
+            const isCorrect = optIdx === CORRECT[globalIdx];
+            fb.className = 'feedback ' + (isCorrect ? 'ok' : 'bad');
+            fb.textContent = isCorrect ? '✓ Correct ! ' + EXPLAIN[globalIdx] : '✗ ' + EXPLAIN[globalIdx];
+            saveState();
+            checkAllAnswered(secIdx);
+        }
+    
+        function checkAllAnswered(secIdx) {
+            let answered = 0;
+            for (let i = 0; i < 3; i++) {
+                if (state.answers[secIdx * 3 + i] !== null) answered++;
+            }
+            document.getElementById('sub' + secIdx).disabled = (answered < 3);
+        }
+    
+        function submitQuiz(secIdx) {
+            state.submitted[secIdx] = true;
+            document.getElementById('sub' + secIdx).disabled = true;
+            let correct = 0;
+            for (let i = 0; i < 3; i++) {
+                const g = secIdx * 3 + i;
+                if (state.answers[g] === CORRECT[g]) correct++;
+            }
+            document.getElementById('s' + secIdx).textContent = correct;
+            const pass = correct >= 2;
+            document.getElementById('pass' + secIdx).classList.toggle('show', pass);
+            document.getElementById('fail' + secIdx).classList.toggle('show', !pass);
+            if (pass) {
+                document.getElementById('nxt' + secIdx).style.display = 'inline-block';
+                state.completed[secIdx] = true;
+                updateReminderBadge(secIdx);
+                updateProgress();
+            }
+            const qoAll = document.querySelectorAll(`#quiz${secIdx} .opt`);
+            if (!pass) {
+                qoAll.forEach(o => o.classList.add('disabled'));
+            }
+            saveState();
+        }
+    
+        function resetQuiz(secIdx) {
+            state.submitted[secIdx] = false;
+            state.completed[secIdx] = false;
+            for (let i = 0; i < 3; i++) state.answers[secIdx * 3 + i] = null;
+            for (let i = 0; i < 3; i++) {
+                const g = secIdx * 3 + i;
+                const cont = document.getElementById('q' + g + 'o');
+                if (cont) { cont.querySelectorAll('.opt').forEach(o => { o.className = 'opt'; o.onclick = function () { pick(secIdx, i, Array.from(cont.querySelectorAll('.opt')).indexOf(this)); }; }); }
+                document.getElementById('fb' + secIdx + '-' + i).className = 'feedback';
+                document.getElementById('fb' + secIdx + '-' + i).textContent = '';
+            }
+            document.getElementById('s' + secIdx).textContent = '0';
+            document.getElementById('sub' + secIdx).disabled = true;
+            document.getElementById('nxt' + secIdx).style.display = 'none';
+            document.getElementById('pass' + secIdx).classList.remove('show');
+            document.getElementById('fail' + secIdx).classList.remove('show');
+            saveState();
+        }
+    
+        function unlock(secIdx) {
+            if (!state.unlocked[secIdx]) {
+                state.unlocked[secIdx] = true;
+                const nb = document.getElementById('nav' + secIdx);
+                nb.classList.remove('locked');
+            }
+            saveState();
+            goTo(secIdx);
+        }
+    
+        function goTo(secIdx) {
+            if (!state.unlocked[secIdx]) return;
+            document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('visible', i === secIdx));
+            document.querySelectorAll('.ch-btn').forEach((b, i) => b.classList.toggle('active', i === secIdx));
+            document.querySelector('.section.visible').scrollIntoView({behavior:'smooth'})
+            // document.getElementById('quiz0').scrollIntoView({behavior:'smooth'})
+            state.current = secIdx;
+            saveState();
+        }
+    
+        function updateReminderBadge(secIdx) {
+            const rem = document.getElementById('reminder' + secIdx);
+            if (!rem) return;
+            if (state.completed[secIdx]) {
+                rem.classList.add('done-reminder');
+                rem.querySelector('.reminder-text strong').textContent = '✓ Quiz réussi !';
+                rem.querySelector('.reminder-text span').textContent = 'Tu peux passer à la section suivante.';
+                rem.querySelector('.reminder-btn').textContent = 'Section suivante →';
+                rem.querySelector('.reminder-btn').onclick = () => {
+                    if (secIdx < 3) unlock(secIdx + 1);
+                    else document.getElementById('finalBanner').scrollIntoView({ behavior: 'smooth' });
+                };
+            }
+        }
+    
+        function updateProgress() {
+            const done = state.completed.filter(Boolean).length;
+            const pct = Math.round((done / 4) * 100);
+            document.getElementById('pbar').style.width = pct + '%';
+            document.getElementById('plabel').textContent = done + ' / 4 sections complétées';
+            document.querySelectorAll('.ch-btn').forEach((b, i) => {
+                if (state.completed[i]) b.classList.add('done');
+            });
+        }
+    
+        function finishCourse() {
+            document.getElementById('finalBanner').style.display = 'block';
+            updateProgress();
+            saveState();
+        }
+    
+        function resetProgress() {
+            if (!confirm('Réinitialiser toute ta progression ? Cette action est irréversible.')) return;
+            localStorage.removeItem(LS_KEY);
+            location.reload();
+        }
+    
+        // ── Restore state on load ──────────────────────────────────────────────────
+        function restoreFromState() {
+            // Unlock nav buttons
+            state.unlocked.forEach((u, i) => {
+                const nb = document.getElementById('nav' + i);
+                if (u) nb.classList.remove('locked');
+                if (state.completed[i]) nb.classList.add('done');
+            });
+    
+            // Restore each quiz
+            for (let secIdx = 0; secIdx < 4; secIdx++) {
+                // Re-attach option click handlers
+                for (let qIdx = 0; qIdx < 3; qIdx++) {
+                    const g = secIdx * 3 + qIdx;
+                    const cont = document.getElementById('q' + g + 'o');
+                    if (!cont) continue;
+                    cont.querySelectorAll('.opt').forEach((o, i) => {
+                        o.onclick = () => pick(secIdx, qIdx, i);
+                    });
+    
+                    // Restore selected answer visuals
+                    const chosen = state.answers[g];
+                    if (chosen !== null) {
+                        const opts = cont.querySelectorAll('.opt');
+                        opts[chosen].classList.add(chosen === CORRECT[g] ? 'correct' : 'wrong');
+                        const fb = document.getElementById('fb' + secIdx + '-' + qIdx);
+                        const isCorrect = chosen === CORRECT[g];
+                        fb.className = 'feedback ' + (isCorrect ? 'ok' : 'bad');
+                        fb.textContent = isCorrect ? '✓ Correct ! ' + EXPLAIN[g] : '✗ ' + EXPLAIN[g];
+                    }
+                }
+    
+                // Restore submitted state
+                if (state.submitted[secIdx]) {
+                    document.getElementById('sub' + secIdx).disabled = true;
+                    let correct = 0;
+                    for (let i = 0; i < 3; i++) {
+                        if (state.answers[secIdx * 3 + i] === CORRECT[secIdx * 3 + i]) correct++;
+                    }
+                    document.getElementById('s' + secIdx).textContent = correct;
+                    const pass = correct >= 2;
+                    document.getElementById('pass' + secIdx).classList.toggle('show', pass);
+                    document.getElementById('fail' + secIdx).classList.toggle('show', !pass);
+                    if (pass) document.getElementById('nxt' + secIdx).style.display = 'inline-block';
+                    if (!pass) document.querySelectorAll(`#quiz${secIdx} .opt`).forEach(o => o.classList.add('disabled'));
+                } else {
+                    checkAllAnswered(secIdx);
+                }
+    
+                // Update reminder badge
+                updateReminderBadge(secIdx);
+            }
+    
+            // Restore current section
+            document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('visible', i === state.current));
+            document.querySelectorAll('.ch-btn').forEach((b, i) => b.classList.toggle('active', i === state.current));
+    
+            // Restore final banner
+            if (state.completed.every(Boolean)) {
+                document.getElementById('finalBanner').style.display = 'block';
+            }
+    
+            updateProgress();
+        }
+    
+        restoreFromState();
+    </script>
+</body>
+</html>
+
